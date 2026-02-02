@@ -1,0 +1,236 @@
+{
+  "domain": "Financial",
+  "namespace": "App\\Domains\\Financial",
+  "description": "Financial entities including invoices, payments, taxes, and accounting",
+
+  "entities": {
+    "Invoice": {
+      "table": "invoices",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "create", "update", "delete"],
+      "fillable": ["organisation_id", "member_id", "invoice_number", "issue_date", "due_date", "status", "subtotal", "tax_total", "total", "currency_code"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "member_id": { "type": "unsignedBigInteger", "index": true },
+        "invoice_number": { "type": "string", "length": 100 },
+        "issue_date": { "type": "date" },
+        "due_date": { "type": "date" },
+        "status": { "type": "enum", "values": ["draft", "sent", "paid", "overdue", "cancelled"] },
+        "subtotal": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_total": { "type": "decimal", "precision": 14, "scale": 6 },
+        "total": { "type": "decimal", "precision": 14, "scale": 6 },
+        "currency_code": { "type": "char", "length": 3 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "member": { "entity": "Member", "domain": "Members", "fk": "member_id", "ref": "id" }
+        },
+        "hasMany": {
+          "lines": { "entity": "InvoiceLine", "domain": "Financial", "fk": "invoice_id", "ref": "id" },
+          "payments": { "entity": "Payment", "domain": "Financial", "fk": "invoice_id", "ref": "id" }
+        }
+      }
+    },
+
+    "InvoiceLine": {
+      "table": "invoice_lines",
+      "timestamps": true,
+      "fillable": ["invoice_id", "description", "quantity", "unit_price", "tax_rate", "amount"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "invoice_id": { "type": "unsignedBigInteger", "index": true },
+        "description": { "type": "string", "length": 255 },
+        "quantity": { "type": "integer" },
+        "unit_price": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_rate": { "type": "decimal", "precision": 14, "scale": 6 },
+        "amount": { "type": "decimal", "precision": 14, "scale": 6 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "invoice": { "entity": "Invoice", "domain": "Financial", "fk": "invoice_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Payment": {
+      "table": "payments",
+      "timestamps": true,
+      "aggregate_root": true,
+      "fillable": ["organisation_id", "member_id", "invoice_id", "payment_date", "amount", "payment_method", "reference", "status"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "member_id": { "type": "unsignedBigInteger", "index": true },
+        "invoice_id": { "type": "unsignedBigInteger", "nullable": true, "index": true },
+        "payment_date": { "type": "date" },
+        "amount": { "type": "decimal", "precision": 14, "scale": 6 },
+        "payment_method": { "type": "string", "length": 100 },
+        "reference": { "type": "string", "length": 255, "nullable": true },
+        "status": { "type": "enum", "values": ["pending", "completed", "failed", "refunded"] }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "member": { "entity": "Member", "domain": "Members", "fk": "member_id", "ref": "id" },
+          "invoice": { "entity": "Invoice", "domain": "Financial", "fk": "invoice_id", "ref": "id" }
+        }
+      }
+    },
+
+    "PaymentMethod": {
+      "table": "payment_methods",
+      "timestamps": true,
+      "fillable": ["organisation_id", "name", "type", "is_active", "config"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "type": { "type": "string", "length": 100 },
+        "is_active": { "type": "boolean", "default": true },
+        "config": { "type": "json", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "TaxRate": {
+      "table": "tax_rates",
+      "timestamps": true,
+      "fillable": ["organisation_id", "name", "rate", "is_default"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "rate": { "type": "decimal", "precision": 5, "scale": 4 },
+        "is_default": { "type": "boolean", "default": false }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Vat": {
+      "table": "vats",
+      "timestamps": true,
+      "fillable": ["country_id", "rate", "name"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "country_id": { "type": "unsignedBigInteger", "index": true },
+        "rate": { "type": "decimal", "precision": 5, "scale": 4 },
+        "name": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "country": { "entity": "Country", "domain": "Shared", "fk": "country_id", "ref": "id" }
+        }
+      }
+    },
+
+    "AccountingCode": {
+      "table": "accounting_codes",
+      "timestamps": true,
+      "fillable": ["organisation_config_financial_id", "code", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_config_financial_id": { "type": "unsignedBigInteger", "index": true },
+        "code": { "type": "string", "length": 255 },
+        "description": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisationConfigFinancial": { "entity": "OrganisationConfigFinancial", "domain": "Tenancy", "fk": "organisation_config_financial_id", "ref": "id" }
+        }
+      }
+    },
+
+    "AccountBalance": {
+      "table": "account_balances",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "update"],
+      "fillable": ["organisation_id", "holder_type", "holder_id", "balance", "currency_code", "last_transaction_at"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "holder_type": { "type": "string", "length": 255, "comment": "Member or Group" },
+        "holder_id": { "type": "unsignedBigInteger", "comment": "ID of Member or Group" },
+        "balance": { "type": "decimal", "precision": 14, "scale": 6, "default": "0.000000" },
+        "currency_code": { "type": "char", "length": 3, "default": "GBP" },
+        "last_transaction_at": { "type": "timestamp", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        },
+        "morphTo": {
+          "holder": { "morph_name": "holder" }
+        },
+        "hasMany": {
+          "transactions": { "entity": "AccountTransaction", "domain": "Financial", "fk": "account_balance_id", "ref": "id" }
+        }
+      },
+
+      "indexes": [
+        { "columns": ["holder_type", "holder_id"], "unique": true }
+      ]
+    },
+
+    "AccountTransaction": {
+      "table": "account_transactions",
+      "timestamps": true,
+      "fillable": ["account_balance_id", "type", "amount", "description", "reference_type", "reference_id", "processed_by", "processed_at"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "account_balance_id": { "type": "unsignedBigInteger", "index": true },
+        "type": { "type": "enum", "values": ["credit", "debit", "adjustment"] },
+        "amount": { "type": "decimal", "precision": 14, "scale": 6 },
+        "description": { "type": "text", "nullable": true },
+        "reference_type": { "type": "string", "length": 255, "nullable": true, "comment": "Payment, Invoice, etc." },
+        "reference_id": { "type": "unsignedBigInteger", "nullable": true, "comment": "ID of Payment, Invoice, etc." },
+        "balance_before": { "type": "decimal", "precision": 14, "scale": 6, "comment": "Balance before transaction" },
+        "balance_after": { "type": "decimal", "precision": 14, "scale": 6, "comment": "Balance after transaction" },
+        "processed_by": { "type": "unsignedBigInteger", "nullable": true, "comment": "User who processed transaction" },
+        "processed_at": { "type": "timestamp", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "accountBalance": { "entity": "AccountBalance", "domain": "Financial", "fk": "account_balance_id", "ref": "id" },
+          "processedBy": { "entity": "User", "domain": "Auth", "fk": "processed_by", "ref": "id" }
+        },
+        "morphTo": {
+          "reference": { "morph_name": "reference" }
+        }
+      },
+
+      "indexes": [
+        { "columns": ["reference_type", "reference_id"] }
+      ]
+    }
+  }
+}

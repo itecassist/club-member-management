@@ -1,0 +1,246 @@
+{
+  "domain": "Tenancy",
+  "namespace": "App\\Domains\\Tenancy",
+  "tenant": {
+    "mode": "single_db_scoped",
+    "tenant_table": "organisations",
+    "tenant_key": "organisation_id"
+  },
+
+  "entities": {
+    "Organisation": {
+      "table": "organisations",
+      "primary_key": "id",
+      "timestamps": true,
+      "soft_deletes": false,
+      "aggregate_root": true,
+      "fillable": ["name", "seo_name", "email", "phone", "logo", "website", "description", "free_trail", "free_trail_end_date", "billing_policy", "is_active"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "name": { "type": "string", "length": 255 },
+        "seo_name": { "type": "string", "length": 64, "unique": true },
+        "email": { "type": "string", "length": 255 },
+        "phone": { "type": "string", "length": 255, "nullable": true },
+        "logo": { "type": "string", "length": 255, "nullable": true },
+        "website": { "type": "string", "length": 255, "nullable": true },
+        "description": { "type": "text", "nullable": true },
+        "free_trail": { "type": "boolean", "default": true },
+        "free_trail_end_date": { "type": "date" },
+        "billing_policy": { "type": "enum", "values": ["debit_order", "wallet", "invoice"], "default": "debit_order" },
+        "is_active": { "type": "boolean", "default": true }
+      },
+
+      "relations": {
+        "hasMany": {
+          "members": { "entity": "Member", "domain": "Members", "fk": "organisation_id", "ref": "id" },
+          "configs": { "entity": "OrganisationConfig", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "configAdmins": { "entity": "OrganisationConfigAdmin", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "configFinancials": { "entity": "OrganisationConfigFinancial", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "configMembers": { "entity": "OrganisationConfigMember", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "configSubscriptions": { "entity": "OrganisationConfigSubscription", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "lists": { "entity": "OrganisationList", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "roles": { "entity": "OrganisationRole", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      },
+
+      "requests": {
+        "store": {
+          "class": "StoreOrganisationRequest",
+          "rules": {
+            "name": ["required", "string", "max:255"],
+            "seo_name": ["required", "string", "max:64", "unique:organisations,seo_name"],
+            "email": ["required", "email", "max:255"],
+            "phone": ["nullable", "string", "max:255"],
+            "logo": ["nullable", "string", "max:255"],
+            "website": ["nullable", "url", "max:255"],
+            "description": ["nullable", "string"],
+            "free_trail": ["boolean"],
+            "free_trail_end_date": ["required", "date"],
+            "billing_policy": ["in:debit_order,wallet,invoice"],
+            "is_active": ["boolean"]
+          }
+        },
+        "update": {
+          "class": "UpdateOrganisationRequest",
+          "rules": {
+            "name": ["string", "max:255"],
+            "seo_name": ["string", "max:64"],
+            "email": ["email", "max:255"],
+            "phone": ["nullable", "string", "max:255"],
+            "logo": ["nullable", "string", "max:255"],
+            "website": ["nullable", "url", "max:255"],
+            "description": ["nullable", "string"],
+            "free_trail": ["boolean"],
+            "free_trail_end_date": ["date"],
+            "billing_policy": ["in:debit_order,wallet,invoice"],
+            "is_active": ["boolean"]
+          }
+        }
+      },
+
+      "events": [
+        { "name": "OrganisationCreated", "payload": ["id"] }
+      ]
+    },
+
+    "OrganisationConfig": {
+      "table": "organisation_configs",
+      "primary_key": "id",
+      "timestamps": true,
+      "fillable": ["organisation_id", "key", "value"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "key": { "type": "string", "length": 100 },
+        "value": { "type": "text", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationRole": {
+      "table": "organisation_roles",
+      "timestamps": true,
+      "fillable": ["organisation_id", "name", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationList": {
+      "table": "organisation_lists",
+      "timestamps": true,
+      "fillable": ["organisation_id", "name", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationConfigAdmin": {
+      "table": "organisation_config_admins",
+      "timestamps": true,
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "member_id": { "type": "unsignedBigInteger", "index": true },
+        "role_id": { "type": "unsignedBigInteger", "index": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "member": { "entity": "Member", "domain": "Members", "fk": "member_id", "ref": "id" },
+          "role": { "entity": "OrganisationRole", "domain": "Tenancy", "fk": "role_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationConfigFinancial": {
+      "table": "organisation_config_financials",
+      "timestamps": true,
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "currency": { "type": "char", "length": 1 },
+        "vat_status": { "type": "boolean", "default": true },
+        "vat_number": { "type": "string", "length": 255 },
+        "financial_year_end": { "type": "string", "length": 10 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationConfigMember": {
+      "table": "organisation_config_members",
+      "timestamps": true,
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "should_authorize_members": { "type": "boolean", "default": false },
+        "require_2fa": { "type": "boolean", "default": false },
+        "max_days_between_2fa": { "type": "unsignedTinyInteger" },
+        "require_physical_address": { "type": "boolean", "default": false },
+        "require_physical_address_for_groups": { "type": "boolean", "default": false },
+        "has_junior_members": { "type": "boolean", "default": false },
+        "junior_member_max_age": { "type": "unsignedTinyInteger", "default": 18 },
+        "junior_member_auto_renew_to_adult": { "type": "boolean", "default": false },
+        "has_family_membership": { "type": "boolean", "default": false },
+        "family_membership_max_adults": { "type": "unsignedTinyInteger", "default": 2 },
+        "family_membership_max_juniors": { "type": "unsignedTinyInteger", "default": 2 },
+        "has_group_members": { "type": "boolean", "default": false },
+        "does_each_group_member_have_membership_number": { "type": "boolean", "default": true },
+        "has_membership_numbers": { "type": "boolean", "default": true },
+        "does_membership_numbers_auto_increment": { "type": "boolean", "default": true },
+        "can_member_sign_declaration_for_other_adult_members": { "type": "boolean", "default": false },
+        "prompt_admin_to_remove_inactive_members": { "type": "boolean", "default": true },
+        "max_days_inactive": { "type": "unsignedInteger", "default": 365 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "OrganisationConfigSubscription": {
+      "table": "organisation_config_subscriptions",
+      "timestamps": true,
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "can_member_have_more_than_one_subscription": { "type": "boolean", "default": false },
+        "can_have_subscription_without_membership": { "type": "boolean", "default": false },
+        "recently_expired_annual_subscription_months": { "type": "unsignedTinyInteger", "default": 1 },
+        "recently_expired_monthly_subscription_days": { "type": "unsignedTinyInteger", "default": 30 },
+        "recently_expired_other_period_days": { "type": "unsignedTinyInteger", "default": 30 },
+        "renew_annual_subscription_months": { "type": "unsignedTinyInteger", "default": 1 },
+        "renew_monthly_subscription_days": { "type": "unsignedTinyInteger", "default": 30 },
+        "renew_other_subscription_days": { "type": "unsignedTinyInteger", "default": 30 },
+        "forced_joining_fee": { "type": "boolean", "default": true },
+        "subscription_joining_id": { "type": "unsignedBigInteger", "nullable": true },
+        "auto_renewal_order_days": { "type": "unsignedTinyInteger", "default": 5 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1700 @@
+
+
+
+MEMBI BRD - FEATURES
+
+EFFECTIVE DATE	
+VERSION
+
+	DESCRIPTION
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table of Contents
+Introduction	4
+Background	4
+Purpose and Goal	4
+Value Proposition	4
+Audience and User Groups	4
+Out of Scope	5
+Requirements	7
+Public User	7
+View Membi public pages	7
+View Organisation public pages	7
+Organisation Search	7
+Account Creation / Sign-in	7
+Organisation Resource Booking (Out of Scope)	7
+Organisation Shop (Out of Scope)	8
+Organisation Super Admin / Admin Members / Read-Only Admin Members	8
+Organisation Creation	8
+Admin Page	8
+Organisation Configurations	9
+Member Management	9
+Subscription Management	9
+Orders Management	9
+Event Management (Commercial Launch)	9
+Finance Management	9
+Content Management	10
+Communications	10
+Lists Management	10
+Report Configuration	10
+Audit Trail	11
+Warnings	11
+Shop Management (Out of Scope)	11
+Gallery	11
+Individual Organisation Members / User	11
+My Home	11
+Subscriptions Management	12
+Orders	12
+Event Bookings	13
+Resource Bookings (Out of Scope)	13
+Volunteer (Out of Scope)	13
+Group Members	13
+My Home	13
+Group Member Management	15
+Subscriptions Management	15
+Orders	15
+Event Bookings	15
+Resource Bookings (Out of Scope)	16
+Application Admin Users	16
+Organisation Management	16
+Invoice & Finance	16
+Communication	16
+Content Management	16
+Reporting	17
+Job Scheduler	17
+Support Ticket System	17
+Integrations	17
+Payments (Out of Scope)	17
+Organisation API (Out of Scope)	17
+Accounting	17
+Access Control (Out of Scope)	17
+Communication (Out of scope)	17
+Other	17
+
+
+
+
+
+
+
+
+
+Introduction
+Background 
+WebCollect is a software platform that allows organisations, societies, and associations to easily manage their members, membership programs, and events. WebCollect was founded in 2002 and over time the technology stack on which WebCollect was built has become outdated and the platform has not been maintained well, causing the application to become unstable, unscalable, and generally non-performant. 
+This resulted in the business growth stagnating and some customers leaving the platform and the WebCollect brand being damaged. 
+
+Purpose and Goal 
+The purpose of this initiative is to develop a new application, Membi, which will be built on a modern technology stack and have a more modern user interface. 
+Membi will contain many of the popular features from WebCollect as well as newer features requested by the WebCollect customers. These features will be rolled out in an iterative manner. 
+
+Value Proposition 
+The development of the new Membi platform will improve the experience for the existing customers and provide them with new features that will let them get more out of the platform. A modern stable platform will allow the business to pursue new customers and explore new revenue streams that was not available on the old WebCollect platform. 
+
+Audience and User Groups 
+The following user groups have been identified:  
+1.	Public User 
+2.	Organisation Super Admin User
+3.	Organisation Admin User 
+4.	Organisation Read Only
+5.	Group Admin User
+6.	Individual Users
+a.		Adult Users
+b.		Junior Users
+7.	Group Members
+a.	Group Administrators
+b.	Family Groups 
+c.	Corporate Groups 
+8.	Application Admin User 
+9.	External Applications 
+
+Out of Scope 
+The following components will be out of scope for the beta release: 
+-	Resource Bookings
+-	Image Gallery 
+-	Document Templates
+-	Ecommerce Shops 
+-	Organisation Templates
+-	Application-only organisations 
+-	Non-public organisations
+-	New Member Application Reports 
+-	Application Approval process
+-	Event configuration
+-	Event Bookings
+-	Event Waiting Lists 
+-	Event Check-in and Attendance Register
+-	Discounts / Purchase Credits
+-	Reporting
+-	Volunteer management 
+-	Community Chat
+-	Membership Cards
+-	Bulk Updating Subscriptions 
+-	Age Dependant Subscriptions
+-	Member Archiving
+-	Instalment Subscriptions
+-	Email Templates
+-	Email Scheduling 
+-	Email unsubscribe options 
+-	Full / Partial Credits
+-	Restrictions on Account Balances
+-	Xero Integration 
+-	MailChimp Integration 
+-	GoCardless Integration
+-	Stripe Integration
+-	Opayo Integration
+-	Offline Payments 
+-	Keyfob / Door access solution 
+-	Audit trail interface
+-	Support Ticket solution
+-	WebCollect Invoicing  
+-	Referral Discounts
+-	Subscription and Events Sub-sections 
+-	Adding Members via Import
+-	Organisation API
+-	Downloads
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requirements 
+Public User 
+Public users are the users who navigate to the Membi homepage. These users can view and interact with the public facing components of the Membi application and with the public facing components of the organization pages.
+
+View Membi public pages
+The public user will be able to view all the public pages of the Membi public web site such as the home page, help pages, about us pages. 
+Membi Home Page
+The membi home page will the page that the user lands on when they navigate to the Membi site. The page will consist of the following sections: 
+Section Name	Section Rules
+Navigation Bar	This section will contain the navigation bar that the user can make use of to navigate to different pages within Membi. The links will consist of Home, About Us, Organisations, Help, Pricing, Search, Sign in. 
+If the user clicks the search link, the user should be prevented with a search bar to search for organisations. Once these are clicked, the user should be navigated to the page for that option. 
+Banner Image	This section will be populated with the Banner Image for Membi.  
+Features	This section will contain an overview of selected Membi features. 
+User Testimony 	This section will contain a testimony from a organisation admin. 
+Links 	This section will contain links to the FAQ and Demo pages. 
+Call to Action 	This section will contain a call to action for the user to start setting up an organisation. Once clicked, it will take the user through the flow to create an organisation. 
+Featured Clubs	This section will contain the names and logos of featured organisations on the platform. When the user clicks on one of them, they should be navigated to the public page of that organisation.
+
+Organisation Public Pages 
+The user will be navigated to the public page of an organisation public page if the organisation has chosen to be public. 
+The page will consist of the following sections: 
+Section Name	Section Rules
+Banner Image	This section will consist of the organisation banner image. Where the organisation has not uploaded a banner image, this section will be filled with a solid colour background.  
+Logo	This section will consist of the logo image of the organisation. Where the organisation has not uploaded a logo image, this section will not be displayed on the page.  
+Description 	This section will consist of the description of the page. Where the organisation has not created a subscription, this section should not be displayed. 
+Events 	This section will consist of the events. The admin user will be able to toggle the default view to be list view or calendar view. The user will be able toggle between the two views. If the user clicks on the event, they will be taken to the event page where they will be able to make a booking to the event. 
+Subscriptions 	This section will consist of the subscription options that have been configured by the organisation administrators. The user will have buttons to view all the subscriptions where they will be able to add subscriptions to their basket. 
+Buttons 	This section will consist of buttons allowing the user to join the organisation. Once this button is clicked, the user will be navigated to through the sign-up flow. 
+
+Events Page
+The user will be navigated to the events page when they click on an event. The user will be allowed to select their ticket option from this page. 
+The events page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Event Title 	Text Field 	String 	N/A	This field will be populated by the application with the Title of the event.  
+	Event Information 	Text Field	String	N/A	This field will be populated with the description of the event that was created by the user when creating the event. If a description was not created, this field will not be displayed to the user.  
+	Select Date	Radio	-	Event Dates	Yes	This field will be populated with the dates that the organisation admin configured. Once the user selects a date, the ticket options that have been configured for that date by the organisation admin will be displayed. 
+	Select Ticket Option	Radio	-	Ticket Option 	Yes	This field will be populated with the ticket options that the organisation admin configured for the selected date. Once the user selects the pricing option,  
+	Quantity 	Spinner	Integer	Yes	This field will be populated by default with a “1”. The user will be allowed to edit this quantity either by entering a different number or using the arrow buttons to adjust the number.  
+	Add to cart 	Button			The user will use this button to add the selected booking to their cart. Once an event booking is added to the cart, the number of tickets available for that event should be reduced by the number of tickets added to the cart for half an hour. Once the half an hour has passed, the tickets should be available again. 
+	Next	Button			If the organisation admin has linked this event to another event, this button will be available for the user to click through to book a ticket for the next event. Once clicked, the user will be navigated to the event page for that event. 
+If the event has not been linked to another event, this button will navigate the user to the cart page. 
+
+Subscription Page
+The user will be navigated to the subscription page once they clicked on the button to view the subscription options. The subscription page will consist of tabs for each of the subscription categories and an “All” tab that will display all subscriptions. 
+Within the tabs the following fields will be displayed for each of the subscription options: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Subscription Type Name 	Text Field 	String 	N/A	This field will be populated with the name of the subscription type that was configured by the organisation admin.   
+	Price Option Name 	Text Field 	String 	N/A	This field will be populated with the subscription price option that was configured by the organisation admin. 
+	Subscription End Date	Text Field 	String 	N/A	This field will be populated with the subscription end date that was configured by the organisation admin. 
+	Quantity 	Spinner	Integer	Yes	This field will be populated by default with a “1”. The user will be allowed to edit this quantity either by entering a different number or using the arrow buttons to adjust the number.  
+	Add to cart 	Button			The user will use this button to add the selected booking to their cart. 
+
+Below this will be a table that displays the pricing schedule. The first row of this table will be the date range. The second row of this table will be the price of that date range. 
+
+Cart Page 
+The user will navigate to the cart page to check out the items that they have added the cart. The cart page will consist of the following table: 
+Column Name	Column Type	Column Data Type	Column Rules
+Item  	Text Field 	String 	This column will contain the items that have been added to the cart. 
+For subscriptions, the description will read “Subscription Type – Price Option”.
+For subscription renewals, the description will read “Renewal of Subscription type – price option for member/group name”.
+For event bookings, the descriptions will read “Event Name – Price Option Name ” as well as the date if it is a single session. 
+
+
+Price	Text Field 	String 	This column will contain the price of the item. 
+Remove Link	Button		This will appear next to each item in the cart. Once the user clicks this, the item will be removed from the cart and the total for the cart will be recalculated. 
+
+The last row of the table will be a total table which will contain the sum of the prices of the items in the cart. 
+The table will be followed by buttons for the user to navigate back to the page they were on and to proceed with the checkout.
+If the user is not signed in when attempting to check out, they will be presented with the sign-in page and if they do not have an account, they will be required to register before proceeding with the checkout. 
+Before allowing the user to proceed with the checkout, the application must verify whether the user is eligible for the item that they are purchasing. If they are not eligible, the application should present them with the relevant warning message and present them with the options to register someone else if they are purchasing a subscription for a junior or a group subscription. 
+Where they are attempting to purchase a subscription renewal, the application should verify that they are still eligible for the subscription, if they are not, the system should display a warning message. If the organisation has configured a subscription path for that subscription, the user will be presented with the option to switch to that subscription or to select another subscription. If they select the subscription that has been configured for them, the subscription will start the day after their current subscription ends (if they have one in place) once it is paid. If they select to purchase a different subscription, their current subscription will be changed to not renewing status and the subscription they purchased will start the day after the old subscription ends, once it is paid for. 
+If the user attempts to purchase a subscription for which they already have a membership that is current or has recently expired and has a renewing status, the application should present a warning message to inform them of this and give them the option to renew their subscription or purchase for someone else. If they select the renew option, it will be added to their basket. If they indicate that they are purchasing for someone else, the subscription should be added to their basket and a group should be created for this user. The new users details should be captured as part of checkout. The application should verify if their subscription is expired or expiring soon with the status of renewable. If it is, they should be presented with the option to renew their subscription as well. If they select not to, the status of the subscription should be changed to not renewable. If they select to renew, their subscription should be added to the cart and should be changed to active once it has been paid for. 
+If the user attempts to purchase a subscription that is different from their current or recently expired subscription, the application should present a warning message to the user. The user should be presented with the options to switch at renewal time, replace their current subscription, renew the current subscription or purchase a subscription for someone else. If they choose to switch at renewal, the existing subscription should become not renewing, the new subscription should be added with a start date for the day after the current subscription ends. If they choose to replace the subscription, if their current subscription should be marked as not renewing, if it is active the end date should be changed to today, and the new subscription should have a start date of the order date. If they choose to renew their subscription, the selected subscription should be replaced with a renewal for the current/recently expired subscription in the cart and should be processed. If they select to purchase for someone else, a group should be created and the user should be directed through the flow of capturing the new member as part of the checkout. 
+
+Account Creation / Sign-in 
+The public user will be allowed to sign-in to the application or create an account on Membi. They will be allowed to do this from the Membi homepage, an organizations public homepage or will be prompted to do so when attempting to check-out from the cart page. 
+
+Sign-in
+The sign in page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Email  	Text Field 	String 	Yes	The user will use this field to enter their email address. The application should validate that the email is in a valid format.
+	Password	Text Field 	String 	Yes	The user will use this field to enter their password. The application should hide their password as they enter it. 
+	Forgot Password	Link			The user will use this button to indicate that they have forgotten their password. Once clicked, the user will be presented with a screen to enter their email address. 
+	Google	Link			The user will use this link to use their google account to sign-in. Once they do this, they will be navigated to a page where they can enter their google account credentials. If the credentials are confirmed, the user will be logged in. 
+	Facebook 	Link			The user will use this link to use their Facebook account to sign-in. Once they do this, they will be navigated to a page where they can enter their Facebook account credentials. If the credentials are confirmed, the user will be logged in.
+	Sign-in 	Button 			This button will be used to sign in to Membi. Once clicked, the application will verify that the entered email and password match what is stored against the user record. If successful, the user will be directed to their My home page if they signed in from the Membi Home page, the organisation page if they signed in from the organisation public page, or the cart if they signed in from the cart page.
+If the email does not exist on the application or the password does not match what is stored for the captured email, the application should generate a user message to inform the user of this.
+If email and password match, 
+	Sign-up	Button			This button will be used by the user to sign-up. Once kicked off, the navigate the user to the sign-up screen. 
+
+
+Forgot password
+If the user clicked the link to indicate that they have forgotten their password, the forgot password flow will be kicked off. The following fields will be presented to the user: 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Email  	Text Field 	String 	Yes	The user will use this field to enter the email address that is linked with their account.
+	Submit	Button			The user will use this button to submit the email address they have captured. Once clicked, the application will validate that the email exists on the application records. If it does not, the application should generate a message informing the user of this. If it does, the application should generate a password reset email to the captured email address and inform the user of this. 
+
+Once the user clicks on the password reset link in the email, they will be navigated to a page where they can reset their password. This page will consist of the following fields: 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	New Password	Text Field 	String 	Yes	The user will use this field to enter their new password. The application should indicate the password strength. 
+	Confirm Password	Text Field 	String 	Yes	The user will use this field to confirm their new password. The application should validate that the two passwords match. If they do not, the user should not be allowed to proceed and should be presented with a warning message. 
+	Submit 	Button			The user will use this button to submit their new password. Once clicked, the application will add the new password to their record and the user will be navigated back to the log-in page. 
+
+
+
+Sign-up
+The user will be directed to the sign-up screen from the sign-in screen. The user will be presented with the following fields on the sign-up screen. 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	First Name	Text Field 	String 	Yes	The user will use this field to capture their first name. 
+	Last Name	Text Field 	String 	Yes	The user will use this field to capture their last name. 
+	Email  	Text Field 	String 	Yes	The user will use this field to enter their email address. The application should validate that the email is in a valid format.
+	Password	Text Field 	String 	Yes	The user will use this field to capture their password. The application should measure and display the password strength. 
+	Google	Link			The user will use this link to use their google account to sign-up. Once they do this, they will be navigated to a page where they can enter their google account credentials and grant permissions to Membi to use their credentials. 
+	Facebook 	Link			The user will use this link to use their Facebook account to sign-up. Once they do this, they will be navigated to a page where they can enter their Facebook account credentials and grant permissions to Membi to use their credentials.
+	Confirm Password	Text Field 	String 	Yes	The user will use this field to confirm their new password. The application should validate that the two passwords match. If they do not, the user should not be allowed to proceed and should be presented with a warning message.
+	Sign Up	Button			The user will use this field to sign-up. Once clicked, the application will verify if email address is already linked to an account in the application. If it is, the user should be presented with a message informing them of this. If it is not, and the user must go through setting up two-factor authentication, they will be navigated to a screen where they will be allowed to do this. If the user is not required to use two -factor authentication, the user will be directed to their My home page if they signed in from the Membi Home page, the organisation page if they signed in from the organisation public page, or the cart if they signed in from the cart page.
+	Sign In	Button			This button will be used by the user to navigate to the Sign in page. Once clicked, the user should be navigated to the sign in page. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Organisation Super Admin / Admin Members / Read-Only Admin Members
+Organisation administrators are the users who manage the organisations created on Membi. The user who creates the organisation is automatically assigned the role of organisation super admin. The organisation super admin is able to assign the super admin, admin, and read-only admin roles to other members of the organisation and sets the permissions for these admin users. 
+
+Organisation Creation
+Users will create organisations by selecting the create organisation link on the public page and creating an account or logging in, or by the clicking the create organisation button from the “My home” page once logged in. 
+Once the user clicks on the option to create a new organisation, they will be navigated through the organisation creation flow. Where the first page will allow them to capture details on the organisation. 
+The page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Header Text	Text Field 	String	N/A	This field will be populated by the application with the following text: “Get Started with a Free Trail”
+	About you section heading	Text Field 	String	N/A	This field will be populated by the application with the following text: “About You”
+	First Name 	Text Field 	String	Yes	This field will be populated by the user with their first name. 
+If the user is creating the organisation from their “My Home” page, this should be populated with the first name they have captured on their account. 
+	Last Name 	Text Field 	String	Yes	This field will be populated by the user with their last name.
+If the user is creating the organisation from their “My Home” page, this should be populated with the last name they have captured on their account.
+	Email Address	Text Field 	String	Yes	This field will be populated by the user with their email address. The system should validate if the email address captured is in a valid format.  
+If the user is creating the organisation from their “My Home” page, this should be populated with the email address they have captured on their account.
+	Password	Text Field 	String	Yes	This field will be populated by the user with their password. The application will display a password strength rating for the password captured by the user. 
+If the user is creating the organisation from their “My Home” page, this field should not allow the user to capture anything.
+	About organisation section heading	Text Field 	String	N/A	This field will be populated by the application with the following text: “About Your Organisation”
+	Organisation Name 	Text Field 	String	Yes	This field will be populated by the user with the name of their organisation. 
+	Organisation Shortname 	Text Field 	String	Yes	This field will be populated by the user with a three-letter code which will serve as their organisation’s shortname. 
+The application should perform a verification to ensure that the shortname is unique in the application. 
+	Organisation Website	Text Field 	String	No	This field will be populated by the user with the organisation’s website. 
+
+	Default Email Address	Text Field 	String	Yes	This field will be pre-populated with the email address of the user who is creating the organisation. 
+The user will have the option to change the email address, if they do this the application should verify the email address captured is in a valid format.  
+	Does your Organisation Have	CheckBox	Boolean	Yes	This field will be populated with the text “Does you organisation have:” and have options for:
+-	Adults and juniors, for example where you have family/junior subscriptions, adults booking events for their children.   
+-	Members who are corporate/non-family groups (e.g companies, associations).  
+ 
+	Start Trial	Button			This button will trigger the creation of the group on the application. The user will be automatically assigned the role of super admin for the created organisation. A welcome email will be triggered to the user and the user will be navigated to the Admin home for this organisation.   
+	Privacy Policy Text	Text Field 	String	N/A	This field will be populated by the application with the following text: “We may use and disclose the information that you provide, to provide membership, subscription and event management services to Organisations that you are linked to. We will not share your information for marketing purposes. For more information explaining how we use your information, please see our privacy policy.”
+	Privacy Policy	Link	String	N/A	This field will be placed after the privacy policy text. Once clicking, this link will direct the user to the Membi privacy policy page. 
+
+
+After the user creates the organisation, they will be navigated to the Admin page for that organisation. 
+
+Admin Page 
+The admin page will consist of a navigation menu on the left-hand side of the page with links to the Public Home, Admin Home and the following items: 
+	Users
+	Subscriptions 
+	Events 
+	Orders 
+	Emails 
+	List 
+	Reports 
+	Organisation Se
+	Audit Trail (UI out of scope)
+	Downloads (Out of scope)
+	Gallery (Out of Scope)
+The admin page will consist of a basic overview for each section and when clicked on will reveal further information for that section. The metrics of the collapsed view for each of the components will consist of: 
+
+Section 	Metrics
+Warning Message	This will appear at the top of the admin panel in red when the organisation has an invoice that is due. 
+Users 	Number of users 
+Current Members 
+Lapsed Members 
+Search 
+Add User button 
+Subscriptions	New Subscriptions in the last 10 days
+Total Subscriptions 
+Add subscription button
+Events	Next 3 events in the following format: 
+[Event Date][Event Name][Bookings]
+Orders	Orders in the last 10 days
+Number of Pending Payments 
+Number of Pending Refunds
+Emails	Last 3 Emails sent in the format:
+[Sent Date][Email Subject]
+Finance	Last Month Revenue
+Audit Trail 	Last 3 Audit items
+
+Once the user clicks on one of the unexpanded sections, or clicks on the menu button for that section, they will be navigated to a page where they can see further details for that section.
+ 
+Organisation Configurations 
+Organisation admins will be allowed to edit the configurations of their organisation. The adminisatrators will be allowed to navigate to this page from the navigation menu. 
+On the Navigation menu page, there will be four tabs: Basics, Appearance, Site Content, and Configuration.  
+For the Basics tab, the page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	About organisation section heading	Text Field 	String	N/A	This field will be populated by the application with the following text: “About Your Organisation”
+	Organisation Name 	Text Field 	String	Yes	This field will be populated by the application with the name of the organisation that was captured during the creation of the organisation. 
+The user should be allowed to edit this field. 
+	Organisation Shortname 	Text Field 	String	Yes	This field will be populated by the application with the shortname of the organisation that was captured during the creation of the organisation. 
+The user should not be allowed to edit this field.
+	Organisation Website	Text Field 	String	No	This field will be populated by the application with the website of the organisation that was captured during the creation of the organisation. 
+The user should be allowed to edit this field.
+	Default Email Address	Text Field 	String	Yes	This field will be pre-populated with the default email address that was captured during the creation of the organisation.
+The user will have the option to change the email address, if they do this the application should verify the email address captured is in a valid format.  
+	Does your Organisation Have	CheckBox	Boolean	Yes	This field will be populated with the text “Does you organisation have:” The options will be pre-populated with the options that were ticked during the set up of the organisation. 
+If the user changes one of the options (e.g. Unchecks the box for group memberships), the organisation should verify that there are no active subscriptions for that role. 
+	Phone Number 	Text Field 	String	No	This field will be populated by the user with the phone number for the organisation. 
+	Address Line 1	Text Field	String	No	This field will be populated by the user with the first line of the address for the organisation.
+	Address Line 2 	Text Field	String	No	This field will be populated by the user with the second line of the address for the organisation.
+	Address Line 3	Text Field	String	No	This field will be populated by the user with the third line of the address for the organisation.
+	Post Code	Text Field	String	No	This field will be populated by the user with the post code of the address for the organisation.
+	Country 	Text Field	String	No	This field will be populated by the user with the country of the address for the organisation.
+	Date Format	Drop Down	-	MDY (Month, day, year)
+-	DMY (Day, month, year)
+-	YMD (Year, Month, Day)	Yes	The user will use this field to indicate the date format that their organisation will use. 
+	Time Zone	Drop Down	-	UTC+14
+-	UTC+13
+-	UTC+12
+-	UTC+11
+-	UTC+10
+-	UTC+9
+-	UTC+8
+-	UTC+7
+-	UTC+6
+-	UTC+5
+-	UTC+4
+-	UTC+3
+-	UTC+2
+-	UTC+1
+-	UTC
+-	UTC-1
+-	UTC-2
+-	UTC-3
+-	UTC-4
+-	UTC-5
+-	UTC-6
+-	UTC-7
+-	UTC-8
+-	UTC-9
+-	UTC-10
+-	UTC-11
+-	UTC-12	Yes	The user will use this field to indicate the timezone that their organisation will use.
+	Update 	Button			This button will trigger the saving of any updated details. 
+
+
+For the Basics tab, the page will consist of the following:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Logo	Upload Field 		No	This field will be used by the user to upload their organisations logo. This will appear logo area of their public page. 
+	Banner Image	Upload Field		No	This field will be used by the user to upload their organisations banner image. This will appear banner image area of their public page.
+	Primary Colour	Colour Thumbnail 		No	This field will be used by the user to select a primary colour for their organisation. 
+	Secondary Colour 	Colour Thumbnail		No	This field will be used by the user to select a secondary colour for their organisation.
+	Button Colour 	Colour Thumbnail		No	This field will be used by the user to select a button colour for their organisation.
+	Update 	Button		N/A	This button will trigger the saving of the appearance settings.  
+
+
+The site content page will consist of 4 tabs called Public Home, Subscriptions, Event Category, Event Page 
+Within the Site Content page, the Public Home tab will consist of the following:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Banner Image 	Image			This field will display the banner image that will be displayed on the organisation public page. The user will be allowed to click on an edit button to allow the user to upload a banner image for the organisation. 
+	Logo	Image			This field will display the logo image that will be displayed on the organisation public page. The user will be able to click an edit button which will allow them to upload a logo image.
+	Home Page Introduction 	Text Field			This field will contain the text that will be displayed in the introduction section of the organisation public home page. The user will be able to click an edit button to edit the text that appears and will also be able to drag the field to another part of the page. 
+	Events 	Text Field			This field will contain the content that will be displayed in the events section of the organisation public home page. 
+The user will be able to set which view is shown on the public page and drag the field to another part of the page.
+	About Us	Text Field			This field will contain the text that will be displayed in the about us section of the organisation public home page. 
+The user will be able to click an edit button to edit the text that appears and will also be able to drag the field to another part of the page. 
+	Preview	Button			The user will select this button to view a preview of what the home page will look like. Once clicked, the application should display a preview of the organisation public home page. 
+	Save	Button			The user will select this button to save the changes made to the organisation home page content. Once clicked the changes made should be saved against the organisation. 
+
+The subscriptions page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Category Tabs 	Button 			The category tabs will consist of the subscription categories that has been configured by the admin. The subscriptions that have been allocated to a category will appear underneath the tabs. The user will be able to rearrange the order of the tabs. 
+	Subscription Name 	Text			This field will be populated with the subscription name that has been configured for the subscription. The user will be able to edit the name.  
+	Subscription Description 	Text			This field will be populated with the description that has been created for a subscription. The user will be able to edit the description.
+	Subscription Price 	Text			This field will be populated with the price that has been assigned to a description. The user will be able to edit the price options.  
+	Preview 	Button			This button will be used by user to see a preview of how the subscription page will appear. Once clicked the application should show the user a preview of the subscription page. 
+	Save Changes	Button			This button will be used by the user to save the changes they have made. Once clicked the changes should be saved. 
+
+The Event Category page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Categories 	Link			The category field will consist of the categories that the users have configured and a picture.
+The users will be able to rearrange the categories and edit the picture for each category. 
+	Preview 	Button			This button will be used by user to see a preview of how the subscription page will appear. Once clicked the application should show the user a preview of the subscription page. 
+	Save Changes	Button			This button will be used by the user to save the changes they have made. Once clicked the changes should be saved. 
+
+The event page tab will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Event Description	Link			The Event Description portion of the page will consist of text that the user has created when setting up an event. The user will be able to drag this section to adjust where it appears on the events page. 
+	Event Image	Upload			This section will consist of an image that the user has uploaded for this event when setting up this event. The user will be able to drag this section to adjust where it appears on an event page. 
+	Ticket Options				The ticket option section will consist of the ticket options that was configured for an event when it was set up by a user. The user will be able to drag this section around to change where it appears on an events page. 
+	Preview 	Button			This button will be used by user to see a preview of how the events page will appear. Once clicked the application should show the user a preview of the events page. 
+	Save	Button			This button will be used by the user to save the changes they have made. Once clicked the changes should be saved for this organisation.  
+
+The configuration page of the organisation settings will consist of the following sub-pages: 
+-	Members 
+-	Events
+-	Subscriptions 
+-	Financial 
+-	Administrators 
+-	Reports 
+Each of these sub-pages will be shown as a tab on configuration page. 
+The Members page will consist of the following: 
+A table of the membership forms that have been created by the user for memberships in the organisation will be presented at the top of the page. The columns will consist of:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Form Name	Text			This column will be populated with the name of the form that was created when the user created the form.
+	Create Date				This column will be populated with the date that the form was created. 
+	Creator 				This column will be populated with the name of the name of the user who created the list. 
+	Membership 				This column will be populated with the name of the membership that the form was linked to when created. 
+	Actions 				The actions column will contain buttons to edit the form. Once clicked, the user will be navigated to the form creation page where they will be able to make changes to the forms. 
+
+Above the table, a “create form” button will allow the user to create a new membership form. Once the user clicks this button, they will be directed to the form creation page. 
+Below the table, the configuration options related to membership within the organization will be available for users with the correct permissions to make changes to. The fields in this part of the page will consist of: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Section Heading Text	Text Field 	String	N/A	This field will be populated by the application with the following text: “Members”
+	Default Address Company 	Advanced Dropdown Menu	-	Countries	Yes	The user will use this field to select the default address country of the organisation. This field will be pre-populated with the country of user who created the organisation. 
+	2 Factor Authentication Enabled? 	Toggle	-	Yes
+-	No	Yes	The user will use this field to select if the members of the organisation have to sign in with 2 factor authentication. By default, the toggle will be switched to “Yes”.  
+	Physical Address	Radio	-	Yes 
+-	No 	Yes	The user will use this to select if the members will be required to provide a physical address. This field should be accompanied by the note ‘’If some of your members are in groups, only one person will be required to provide an address. Those without an address will automatically use that address.”
+	Should all group members have to provide an address?	Radio	-	No, group members can use the default address. 
+-	Yes, each individual member in the group must provide their own address 	Yes	This field will be displayed when the organisation has indicated that they have corporate / non-family groups. 
+If yes, each member in the corporate/non-family groups will be required to provide their own address. 
+
+	At which age will a member cease to be a junior? 	Text Field 	String	Yes	This field will be displayed when the organisation has indicated that they have junior members. The value here will be used by the application to verify if a user is a junior or not. The default age will be 18.  
+	Subscription to be renewed if they are no longer a junior at renewal time? 	Radio	-	Yes
+-	No	Yes	This field will be displayed when the organisation has indicated that they have junior members. If yes, the application should set a juniors status to swapping if they will be above the age where they cease being a junior. If no, the subscription will be set to not renewing if they will be above the age where they cease being a junior. The default option will be Yes. 
+	Should the system switch them to a different subscription at the renewal? 	Radio	-	Yes
+-	No	Yes	This field will be displayed when the organisation has indicated that they have junior members. If yes, the organisation admin will be requested to set the upgrade path. If no, the member will be prompted to renew and will have to select the adult subscription option that they renew to. The default option will be Yes.
+	Path fields	Drop down menus	-	Subscription Options	Yes	This field will be displayed if the organisation admin has selected “yes” in the field above. The field will have two drop down menus. The first will be populated with the junior subscription options. The second will be populated with adult subscription options.  If the organisation admin has not created subscription options, the application should display a message informing them of this and that they should create some first. 
+	Add Path	Button		N/A	The button will be used to add more upgrade paths. Once clicked, the application will provide more drop downs for the organisation admin to specify paths. 
+	Who can sign declaration forms? 	Radio	-	Only Adults in Family 
+-	The Junior or Adults in Family	Yes	This field will be displayed when the organisation has indicated that they have junior members.
+If only adults is selected, only the adults should be allowed to sign declaration forms in this organisation. 
+If junior and adults is selected, junior and adults will be able to sign declaration forms in the organisation.
+The default will be Only Adults in Family.  
+	Should the system require the member to login and complete any consents/declarations when they cease to be a junior? 	Radio	-	Yes
+-	No	Yes	This field will be displayed when the organisation has indicated that they have junior members.
+If yes is selected, after aging out of being a junior, they will be required to sign declaration forms on their next sign-in. 
+If no is selected, after aging out of being a junior, they will not be required to sign declaration forms on their next sign-in.
+By default, yes will be selected. 
+
+	Does your organisation have membership numbers? 	Radio	-	Yes
+-	No	Yes	The organisation admin will use this field to indicate if the organisation uses user numbers. If yes, they will be required to provide further information. 
+The default option will be Yes. 
+	If you have groups, how do you allocate membership numbers? 	Radio	-	Separate number to each individual in the group
+-	Single membership number for the group	Yes	This field will be displayed if the organisation selected Yes to the question above. 
+If the separate number option is selected, the application should allocate a membership number to each member in the group. 
+If the single number option is selected, the application should allocate a single number to all members in the group. 
+By default, the separate number option should be selected. 
+	Prompt administrators to archive/remove inactive members after:	Textfield & Drop Down 	String 
+-	Months 
+-	Years	Yes	The organisation admin will use this field to indicate the period of time after which the organisation admin will be prompted to remove a user for being inactive. 
+The text field will accept numerical input only and the drop down will be populated with “Months” and “Years” the default selection in the drop down menu will be Months.
+	Can a member complete consents/declarations on behalf of other adults in their group? 				
+For the subscriptions page, will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Can Members Have More Than One Subscription At a Time? 	Radio 	-	No 
+-	Yes (if for example you are a multi-sports club with separate subscriptions for each sport).	Yes	This field will be used by the organisation admin to determine if a member can have more than one subscription at a time. If no, the application should validate that a user does not already have a subscription before allowing them to purchase another. 
+	Can members have an Other type of subscription without having a membership subscription?   
+	Radio	-	No
+-	Yes	Yes	This field will be used by the organisation admin to determine if a non-member can purchase an other type of subscription. If no, the application should verify that a user is member before allowing them to purchase an other type of subscription. 
+	Definition of recently expired - Annual	Textbox	String	Yes	This field will be used by the organisation admin to define when annual subscriptions are considered recently expired. The number captured here will be the number of months where a subscription is considered expired.  
+	Definition of recently expired - Monthly 
+	Textbox	String	Yes	This field will be used by the organisation admin to define when monthly subscriptions are considered recently expired. The number captured here will be the number of days where a subscription is considered expired.  
+	Definition of recently expired - Other Period
+	Textbox	String	Yes	This field will be used by the organisation admin to define when subscriptions  that are not annual or monthly are considered recently expired. The number captured here will be the percentage of the period within a subscription is considered expired.  
+	Definition of renewing soon - Annual	Textbox	String	Yes	This field will be used by the organisation admin to define when annual subscriptions are considered renewing soon. The number captured here will be the number of months where a subscription is considered renewing soon.  
+	Definition of renewing soon - Monthly 
+	Textbox	String	Yes	This field will be used by the organisation admin to define when monthly subscriptions are considered renewing soon. The number captured here will be the number of days where a subscription is considered renewing soon.  
+	Definition of renewing soon - Other Period
+	Textbox	String	Yes	This field will be used by the organisation admin to define when subscriptions that are not annual or monthly are considered renewing soon. The number captured here will be the percentage of the period within a subscription is considered renewing soon.  
+	Junior Subscriptions			Yes	This field will be used by the organisation admin to select the upgrade path for each of the junior price options selected. 
+	How long should life subscriptions last for?	Textbox	String	Yes	This field will be used by the organisation admin to select the amount of years for which life subscriptions last. 
+	Specify a subscription that new members must buy (e.g. Joining Fee)	Radio	Yes 
+No 		This field will be used by the organisation admin to select the subscription that a new member must purchase. 
+If yes is selected, the user will be presented with category, type and price option drop downs to select the subscription. 
+	When should auto-renewal orders be placed? 	Radio 
+And Text Field			For each payment method, the organisation admin will be allowed to select if members will be allowed to auto-renew for that payment method or not. If they indicate that members will be allowed to auto-renew for that payment method, the user will be prompted to capture the number of days before expiry where the order will be placed for that payment method. 
+	Subscription Forms: Option to have subscription forms for membership type subscriptions.	Toggle			By default, this will be unselected. If the option is turned on, the application should display the message: “Information about your members is best collected in the membership form.  Please read this article about the very limited cases when this option should be used.” Which will link them to a help article. 
+
+The financial page in the organisation settings will consist of a table detailing the payment methods. This table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Method	Text	String	This column will be populated with the name of the payment method. 
+Description	Text	String	This column will be populated with a description of the payment method. 
+Activated? 	Text	String	This column will be populated with “Yes” if it is activated for the organisation and “No” if it is not actived for the organisation. 
+Admin Only	Text	String	This column will be populated with a “Yes” if it is activated for the organisation admins only and a “No” if it is not activated for the organisation admins only. 
+Default	Text	String	This column will be populated with a “Yes” if the payment method is the default and a “No” if the payment method is not a default. 
+Actions	Buttons		This column will have buttons for the organistian admin to edit and deactivate payment methods that are active and activate payment methods that are not active. 
+
+Furthermore, other configuration options in the finance section will include: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Currency 	Radio 	Currencies	Yes	This field will be used by the organisation admin to set the organisation currency. This field will be populated with currencies that can be used. 
+	VAT Status	Drop down menu			This field will be used by the organisation admin to configure the vat status of the organisation. It will be populated with the VAT Statuses on Web Collect. 
+	Add VAT Rate	Button			This button will be used by the organistaion admin to add a vat rate, setting the name and specifying the rate. 
+	Financial Year End 	Month			This field will be used by the organiisation admin to select the financial year end. The month will be selected and the year end will be set to the end of that month. 
+
+Beneath this will be a table showing accounting codes consisting of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Code	Text	String	This column will be populated with the code.  
+Description 	Text	String	This column 
+Actions 	Buttons		
+Add fields for adding vat rate 
+Add fields for activating cheque and cash payment methods
+
+
+
+
+Member Management 
+The organisation admins will have the ability to configure organisation options around the members such as creating and editing member forms, creating and configuring member lists, group settings, adding members, create groups, adding and removing group members, updating contact information for members, removing members, merging members, and approve members. The admin will also have the ability to import members using a CSV template provided by Membi. 
+
+Subscription Management
+Organisation admins will be allowed to configure rules around subscriptions such as setting up subscriptions, setting rules related to pro-rata pricing, roll-over periods, discounts, subscription prices, renewal paths etc. 
+The admins will also have the ability to manage member subscriptions. 
+For the subscriptions page, will consist of the following: 
+A table of the subscription price options that have been created. This table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Name	Text	String	This column will be populated with the name of the subscription that was captured when the organisation admin created the form.
+Membership 	Text	String	This column will be populated with a “Yes” if the subscription is a membership type subscription and “No” if it is an other type subscription. 
+Option Name 	Text	String	This column will be populated with the name of the pricing option. 
+Option Price 	Text	String	This column will be populated with the price for this pricing option. 
+Eligibility 	Text	String	This column will be populated with the membership types who is eligible for this price option (Individual / Adults / Juniors / Individual in a Group / Group). 
+Period	Text	String	This column will be populated with the length of time that the subscription is valid for in the format [number] and time period [Year, Month, Week, Day].
+Renewal Date	Text	String	This column will be populated with the subscription option that has been configured for the subscription. This will be one of: Subscription anniversary, day-month, Last day of month, Not renewable. 
+Auto-Renew	Text	String	This should be populated with a “No” if the price option is not set to Auto-Renew and “Yes” if it has. If yes, the column should also contain the payment methods for which the Auto-Renew is possible. 
+Form	Text	String	This column will be populated with a “N/A” if there is no form linked to the subscription and a button to view / edit the form if a form has been linked to the subscription. If clicked, the organisation admin should be presented with a window that contains the form fields, allowing them to view it and edit it. 
+Published 	Text	String	This column will be populated with an indicator of whether the subscription type is published to the organisation subscription page. 
+Action			This column will contain buttons for the organisation admin to edit, archive, and see the audit trail for a subscription type. 
+If edit is clicked, the application should navigate the user to a page where the subscription can be edited. 
+If archive button is clicked, the application should archive the subscription if there is no current subscriptions for all the price options. If there are current subscriptions the button should be greyed out. 
+If the audit trail button is clicked, the organisation administrator will be navigated to the audit trail page. 
+
+The table will contain tabs that allows the user to switch between subscriptions that belong to a certain category or view all subscriptions.  
+The window to edit the subscriptions will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Section Heading Text	Text Field 	String	N/A	This field will be populated by the application with the following text: “Members”
+
+Orders Management
+The admins will be able to view orders that have been placed by members. Admins will be able to manage the lifecycle of orders, download reports on orders and place orders on behalf of members.  
+
+Event Management (Out of Scope) 
+The organisation admins will be able to configure events. This will include setting up events, capturing event details (capacity, venue etc.) creating forms for events, creating ticket options, configure rules around ticketing, manage member requests for events, manage volunteers and draw reports related to events. 
+
+Finance Management
+The organisation admin will be allowed to configure finance settings of the organisation such as the currency, VAT rates, Financial year end, accounting codes as well as payment methods available to organisation members and organisation admins. Bank Transfer and Cheque / Cash will be the only two payment methods available to the organisation for Beta Launch. Later payment methods will include Direct Debit, Recurring Offline Payments, Standing Orders, Card Payments (Opayo), Offline Card and Paypal / Stripe.  
+
+Content Management
+Organisation Admins will be allowed to configure contents of their organisation pages. This will include items like the labels that appear on buttons on their page, date and time formats used in the group, profile pictures, button colours, the content on the public and member pages of the organization. 
+
+Communications
+The organisation admins will be able to compose email messages with the use of tags that can be used in ad-hoc communication, saved as drafts for future communications, generate email recipient lists through the use of filters and define reply to addresses.
+
+Lists Management
+The organization administrator will have the ability to create a list of members who can be communicated with and invited to events etc.
+There will be two types of lists:
+	Dynamic lists
+Lists created from saved filters. When the admin selects a dynamic list, the application should present the members from the full set of members who match the filters. These lists should be updated when a new member meets the criteria or fails to meet the criteria. 
+	Static lists
+Lists created by the admin of the users. These lists are managed by the organisation admin. 
+The organisation admins should be able to filter members to see members who are not on a list and should further have the ability to export a list to csv or pdf. 
+
+Report Configuration
+The organization administrator will be able to configure reports to set what appears in the reports, who can see the reports and the frequency that reports are sent with. 
+The reports that can be configured will be: 
+	New Accounts
+•	New people that have been linked to an organization.  
+	New Applications (Out of Scope) 
+•	Members who have applied to join an organization. 
+	New Subscriptions 
+•	New subscriptions that have been purchased. 
+	Event Bookings 
+•	New bookings for events (can be configured to see all events or selected events) 
+	New Members 
+•	New Members who have joined an organization in a specified period. 
+
+Audit Trail 
+The application will have an audit trail that is viewable by the organization administrators for actions performed by admin, members, users and actions performed by the application.
+
+Warnings
+Warnings will be displayed to the administrators related to issues within the organization such as orders that are awaiting payment, orders for which payments have failed, subscriptions that are not auto-renewable that will be expired, junior members who will be converted to adult members and need their subscriptions upgraded to an adult subscription etc. 
+
+Organisation Members / Users
+My Home 
+The “My Home” page will be the page that the user is directed to once they sign in to Membi. On the “My Home” page, they will see a view of their organisations, events, orders, subscriptions etc. and be able to access their organisations. 
+This page will consist of unexpanded sections that contain some information and allows the user to click into the section to see further information. 
+The unexpanded sections will consist of: 
+Section Name	Individuals	Group Members
+My Organisations 	This section will have information on the organisations that they have joined or been added to by the admin of that organisation. This will consist of the organisation name, the date they have been a member from and their role in the organisation.  	Group members will be able to see the organisations that the group has joined or been added to by the admin of that organisation. 
+This will consist of the organisation name, the date they have been a member from and their role in the organisation.  
+Events	This section will contain information on upcoming events from that the user has made bookings for. It will have the organisation, event date and time, event title. 	Group admins will be able to see event information for bookings that the group members have made in addition to their own. 
+Non-Admin members will be able to see information on bookings they have made or have been made for them by the group admin. 
+Subscriptions 	This section will contain information on the subscriptions that they have purchased or have been purchased for them by the admin of an organisation. This will consist of the subscription type, the price option and the expiry date. 
+	Group admins will be able to see the subscriptions for their group members that they have purchased. 
+Non-admin members will be able to see the group subscriptions that have been purchased for them. 
+This will consist of the subscription type, the price option and the expiry date.
+Orders	This section will contain the three most recent orders the member has made. This will consist of the order number, date, number of events, number of subscriptions, order total, and current order status. 	Group Admins will see the orders for the group. 
+Non-admin members will see their own orders and orders that have been placed for them by the group admin. 
+This will consist of the order number, date, number of events, number of subscriptions, order total, and current order status.
+My Groups	Individual Members will not see this section. Once they are added to a group or create a group this section will appear on their “My Home” page and will contain information that group members can see. 	All group members will be able to view a list of group members names, email addresses. Group admin, and email contact for the group. 
+Account Balance	Individual members will see their available account balance. If the balance is positive, this section will contain the message “This amount can be used towards any orders that you place”. If the balance is negative, this section will contain the message “This amount is owing by you to the organisation.”. 	The group admin will be able to see the balance for the whole group.
+Non-admin members will be able to see their own balance. 
+The same messages as the individual view will be displayed here.  
+Saved Payment Methods	Individual Members will be able to view their own payment methods that have been activated.   	Group admins will see the payment methods that have been activated for the group and each of their group members. 
+Non-group admins will be able to view the payment methods that they have activated or has been activated for them.   
+My Profile	This section will contain information on Title, First Name, Last Name, Email Address, and a profile picture, if the user has uploaded one. 	Group Admins will be able to see the information for each group member. 
+Non-admin group members will be able to see their information only.
+My Membership Form 	This section will contain a list of the forms that have been completed or has to be completed by the user. This will consist of the form name, and the last updated date where the form has been completed and a message in red “This form requires completion/updating.” where the organisation admin has requested a form be completed / updated. 	Group Admins will be able to see the forms for all group members. 
+Non-admin members will be able to see the forms for themselves. 
+The same information as is displayed to the individuals. 
+
+The users will be able to expand each of these sections by clicking on a view button. This will navigate them to the corresponding page for the selected section. These pages will be described further below. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+My Organisations
+The user will be navigated to this page once they click on the view button in the My organisation section on the home page. 
+The unexpanded page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	My Organisations Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Organisations”. 
+	Information 	Text Field	String	N/A	This field will be populated by the application with information such as when a user has been added to a group by an admin user. 
+	Search	Search Bar		N/A	This field will allow the user to search for an organisation. The application will return search results that are clickable, once the user clicks on a search result, they should be navigated to the organisation public page. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+Below this will be a table of organisations that the user has been added to by the admins of teat organisation, either as part of a group or as an individual. The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation 	Text Field 	String 	This column will contain the name of the organisation.   
+Date Added	Text Field	String	This column will contain the date that the user was added to an organisation. 
+Added As	Text Field	String	This column will contain the role that the user was added with. 
+Actions 	Buttons		This column will contain buttons allowing the user to view the organisation, accept the organisation, and remove themselves. 
+If they choose to view the organisation, if the organisation has set up two-factor authentication or they are an admin of the organisation, they will be directed to a page where they can capture their pin from the Google Authenticator app. 
+If they choose to accept the organisation, the organisation will be added to their current list. 
+If they choose to remove themselves, the user information will be removed from the organisation and the organisation will be moved to their previously joined organisations. 
+
+Below this, there will be a table detailing the organisations that the user has been linked to. This will consist of the following: 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation 	Text Field 	String 	This column will contain the name of the organisation.   
+Date Joined			This column will be populated with the date that the user joined the organisation. 
+Role			This column will be populated with the role that the user has in the group. (Super Admin, Admin, Member, Family Group Admin, Corporate Group Admin, Group Member, User) 
+Actions			This row will contain action buttons for the user to view the organisation page, request to be removed from the group, and go to the admin page for that group if they are an admin user. 
+If the user chooses to view the organisation page, the user will be navigated to the public page for that organisation. 
+If the user chooses to remove themselves from the organisation, the user will be presented with a message asking them to confirm. If they confirm, the application will notify the administrator of that organisation. 
+If the user chooses to view their admin page they will be navigated to the admin home for that organisation. 
+
+Below this there will be a table of the organisations that the user was previously linked to. This table will contain the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation 	Text Field 	String 	This column will contain the name of the organisation.   
+Date Left 	Text Field 	String 	This will contain the date that the user left the organisation. 
+Actions	Buttons		This column will contain buttons to allow the user to rejoin the organisation or request that their information be removed.
+
+OTP Screen
+Where the user is an organization admin or is a member of an organization that has configured for two factor authentication, they will be directed to a screen where they will be able to enter their pin from the google authenticator app. The page will consist of the following fields:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Pin	Text Field 	String 	Yes	The user will use this field to enter their pin. 
+	Submit	Button			The user will use this button to submit the pin. Once clicked, the application will verify the Pin. If unsuccessful, the application will present a message informing the user and allow them to capture a new pin. 
+If successful, the user will be directed to their My home page if they signed in from the Membi Home page, the organisation page if they signed in from the organisation public page, or the cart if they signed in from the cart page.
+
+
+Events
+Users will be navigated to the events page when clicking on the events section of the “My Home”. The Events page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Events Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Bookings”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+The page will further consist of a table that details the event bookings they had made. The table columns will consist of: 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation 	Text Field 	String 	This column will contain the name of the organisation that created the event.   
+Event Title	Text Field 	String 	This column will contain the title of the event. 
+Event Date	Text Field 	String 	This column will contain the date of the event. 
+Event Time	Text Field 	String 	This column will contain the time of the event. 
+Event Venue 	Text Field 	String 	This column will contain the venue of the event. 
+Status 	Text Field 	String 	This column will contain the status of the event booking. 
+Actions	Buttons		This column will contain a buttons that will allow the user to view the organisation’s event page, request to cancel the booking, or go to the form for the event to edit it. 
+
+There will be a further table below the event bookings table that will detail events where the user joined a waiting list. The waiting list table will consist of the following columns: 
+ 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation 	Text Field 	String 	This column will contain the name of the organisation that created the event.   
+Event Title	Text Field 	String 	This column will contain the title of the event. 
+Event Date	Text Field 	String 	This column will contain the date of the event. 
+Event Time	Text Field 	String 	This column will contain the time of the event. 
+Event Venue 	Text Field 	String 	This column will contain the venue of the event. 
+Waiting List Status	Text Field 	String 	This column will contain the waiting list status of the event. (On waiting list, invited) 
+Actions	Button		This column will contain buttons to view the event page, while the status is “On waiting list”, there will be a button for a user to remove themselves from the waiting list, and when the status changes to invited, there will be a button for the user to go to the event page to create a booking. 
+
+Once the user books an event for which they were on the waiting list. The event will move from the waiting list table to the event booking table. 
+For users who are group admins, they will be able to see the events that they booked on behalf of their group and the bookings they made on the behalf of members within their group. Non-admin members will be able to view the group bookings for the group they are a part of or the individual bookings that have been made for them by their group admin. 
+
+Subscriptions 
+Users will be navigated to the subscriptions page after clicking on the view button of the subscriptions section on the “My Home” page. 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Subscriptions Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Subscriptions”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+	Renew 	Button		N/A	This button will be used by the user to renew subscriptions that they had selected by checking the checkbox in the “Current/Recently Expired” table. Once this button is clicked, the selected subscriptions will be added to the cart for this user and they will be navigated to the checkout page. 
+
+Below this, there will be a table for the current/recently expired subscriptions that will consist of the following columns: 
+
+Column Name	Column Type	Column Data Type	Column Rules
+CheckBox 	CheckBox 	 	This column will contain checkboxes for the user to select individual subscriptions or select the checkbox in the column headings to select all the subscriptions.   
+Subscription	Text Field 	String 	This column will be populated with the name of the subscription in the format {Subscription Type Name} – {Price Option Name}
+Members 	Text Field 	String 	The member, members or group covered by the subscription will be populated in this column. 
+Start Date	Text Field 	String 	This column will be populated with the start date of the subscription. 
+End Date	Text Field 	String 	This column will be populated with the end date of the subscription.
+Renewal Status	Text Field 	String 	This column will be populated with the renewal status of the subscription (Scheduled to Auto-Renew, Manual Renewal, Pending Order Number, Swapping to, Not Renewing) 
+Form Details 	Button 	 	This column will contain buttons to view or edit the form if a form was linked to the subscription. Once the user clicks on these they should be navigated to the page where they can view or edit the form.
+Renewal Amount 	Text Field 	String 	This column will be populated with the price to renew the subscription. 
+Renewal Payment Method	Text Field 	String 	This column will contain the payment method that was used to pay for the subscription which will also be used to pay for the renewal. There will be a link to change the method listed below this. Once this link is clicked, the user will be presented with a window containing the available payment methods for the user to select to pay for the renewal.
+Actions 	Links		This column will contain text links “Don’t Renew” and “Swap at Renewal” which will be disaplayed for subscriptions with renewal status “Auto-Renew” and “Manual Renew”. For subscriptions with the renewal status “Swapping”, only the “Don’t Renew” link will be shown. 
+If the “Don’t Renew” link is clicked, the status for the subscription should be changed to “Not Renewing” and should not be renewed. If the “Swapping to” link is clicked, the status for that subscription should be changed to “Swapping to” and the application should present a pop-up screen allowing the user to select the subscription they will swap to.
+
+The renewal payment method window presented to the user when they select the option to change the payment method will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Warning Message	Text Field	String		This field will be populated by the application with the warning message “If you want to use one of the payment methods that can’t be selected, you will need to manually renew the subscription.  You will be able to select the payment method in checkout.”
+	Available Payment Methods	Drop Down Menu 	-	Payment Methods Configured By Admin 	N/A	The user will select the payment method they want to use to renew the subscription. Payment methods that will require them to go offsite should be greyed out. 
+	Cancel	Button		N/A	This button will be used to navigate back to the “Subscriptions” page. Once clicked, the user will be navigated back to the ““Subscriptions” page and selections made in the drop-down menu should be ignored.  
+	Confirm	Button		N/A	This button will be used by the user to confirm the payment method selected. Once clicked, the user will be navigated back to the “Subscriptions” page and the selected payment method should be assigned to the subscription it was selected for. Where the user selected a greyed out payment method, the status will be updated to manual renew. 
+
+The swapping window presented to the user when they select the “Swapping To” link will consist of the following fields. 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Membership / Other	Radio Button	-	Membership 
+-	Other	Yes	The user will use this field to select if they want a membership subscription or a non-membership subscription (Other). 
+	Subscription Categories	Drop Down Menu	-	Categories configured by Admin	Yes	The user will use this field to select the subscription category (if there is only one category don’t display this field)
+	Subscription Type	Drop Down Menu	-	Subscription Types configured by Admin	Yes	The user will use this field to select the subscription type. The options in the dropdown menu should be filtered to show the types for the category selected. (if there is only one type don’t show this field). 
+	Subscription Price Option	Drop Down Menui	-	Subscription Price Options configured by Admin	Yes	The user will use this field to select the price option. The options in the dropdown menu should be filtered to show the price options for the subscription type selected. 
+
+
+Orders 
+The user will be navigated to the orders page once they click on the view button of the orders section of the “My Home” page.
+The page will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Orders Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Orders”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+Below this, there will be two tables: “Current Subscriptions and Event Bookings” and “Older Orders” 
+The Current subscriptions and Event Bookings table will consist of the following:
+Column Name	Column Type	Column Data Type	Column Rules
+Order Number	Link 	 	This column will be populated by the order number for the order. This should be clickable and once clicked, should navigate the user to the order page for that order. 
+Placed	Text Field	Date	This will be populated by the date that the order was placed.  
+Purchaser	Text Field	String	This will be populated with the name of the person who paid for the order (Only displayed for group purchases).
+Order Total 	Text Field	String	This will be populated with the total cost of the order, including tax, preceeded by the currency symbol of the organisations currency.  
+Payment Method	Text Field	String	This will be populated with the payment method used to pay for the order. If no payment was required this should be populated with “None”.
+Order Status	Text Field	String	This will be populated with the order status of the order. 
+This table should be sorted by the most recent order placed in descending order. 
+
+Above the Older orders table will be a radio button to filter the payments displayed in the table. This will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Filter	Radio Button 	-	All
+-	Subscripotions
+-	Event Bookings  	No	This field will be used by the user to filter the orders seen in the “older orders” table. By default “All” will be selected and all orders displayed. If the user selects Subscriptions, only orders with subscription line items should be displayed. If the user selects Event Bookings, only orders with event bookings should be displayed.  
+
+The Older orders table will be populated with the following: 
+Column Name	Column Type	Column Data Type	Column Rules
+Order Number	Link 	 	This column will be populated by the order number for the order. This should be clickable and once clicked, should navigate the user to the order page for that order. 
+Placed	Text Field	Date	This will be populated by the date that the order was placed.  
+Purchaser	Text Field	String	This will be populated with the name of the person who paid for the order (Only displayed for group purchases).
+Order Total 	Text Field	String	This will be populated with the total cost of the order, including tax, preceeded by the currency symbol of the organisations currency.  
+Payment Method	Text Field	String	This will be populated with the payment method used to pay for the order. If no payment was required this should be populated with “None”.
+Order Status	Text Field	String	This will be populated with the order status of the order. 
+
+If the user clicks on the order number, they will be navigated to the page for that order which will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Purchaser	Text Field 	String 	N/A	This field will be populated with the name of the purchaser.
+	Placed On	Text Field	String	N/A	This field will be populated with the date that the purchase was made on. 
+	Order Total 	Text Field	String	N/A	This field will be populated with the total amount of the order. 
+	Status	Text Field	String	N/A	This field will be populated with the current order status. 
+	Payment Method	Text Field	String	N/A	This field will be populated with the payment method used to pay for the order. 
+	Back 	Button			The user will use this button to exit the order page. Once clicked, the user will be navigated back to the “My Orders” page. 
+
+Below this there will be two tables. The first table will contain the line items of the order and the second table will contain the order statement history. 
+The order items table will consist of: 
+
+Column Name	Column Type	Column Data Type	Column Rules
+Description 	Text Field  	 String 	This column will be populated with the line items that formed part of the order.  
+Tax	Text Field  	String 	This column will be populated with the tax that was charged on each of the line items. 
+Price	Text Field  	String 	This column will be populated with the price that was charged per line item. 
+Beneath the table there will be two rows that details any surcharges added to the payment and the total which sums up the entries in the price column and the surcharges.
+
+The Status History table will consist of the following columns:
+Column Name	Column Type	Column Data Type	Column Rules
+Status 	Text Field  	 String 	This column will be populated with the order status that was assigned to the order.   
+Date	Text Field  	 String 	This column will be populated with the date and time that the order status was assigned to this order. 
+
+My Groups 
+Users who are part of groups will be able to Navigate to this page once they click on the view button of the “My Group” section of the “My Home” page.  
+Group admins will be able to see details of all users on this page. Non-admin users will be able to see their own details. 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	My Groups Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Groups”. 
+	Add Member	Button		N/A	This button will be available to group admins only and will enable them to add a member to a group. Once clicked, a window will be presented to the group admin which will enable them to create a new member. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+Below this, a table will display the user details for each member in the group. The table will consist of the following: 
+Column Name	Column Type	Column Data Type	Column Rules
+Name 	 Text Field 	String 	This column will be populated with the first name and last name of the group member. 
+Email Address	 Text Field 	String 	This column will be populated with the email address of the group member if one was provided. 
+Group Administrator 	 Text Field 	String 	This column will contain a “Yes” if the member is an administrator of the group and a “No” if the member is not an administrator. 
+Group Email Contact	 Text Field 	String 	This column will contain a “Yes” if the member an email contact of the group and a “No” if the member is not an email contact of the group.
+Actions 	Buttons		This column will contain buttons for the admin user to edit the user details, remove the member from the group, make the user an email contact for the group. 
+If the admin clicks on the edit details, they will be presented with a screen containing the users details, allowing them to edit the user details. 
+If the admin clicks the button to remove the user from the group, the application will perform validations to ensure that the user being removed is not a junior, that the user is not the last group admin and present warnings to the user if any of these validations are failed.  
+
+Add Member Screen.
+This screen will be displayed to the admin user when they click the button to add a member to their group. 
+Some of the fields the user will be presented with on this page will be: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Name	Text Field 	String 	Yes	The user will use this field to capture the name of the new member.
+	Surname 	Text Field 	String 	Yes	The user will capture the surname of the user. If the group is a family group, the field will be prepopulated with the surname of the first group member. 
+	Date of Birth	Calendar Dropdown 		Yes	This field will be displayed where an organisation can have junior members or age-dependant subscriptions. The user will use this field to capture the date of birth of the user. 
+	Email Address	Text Field 	String 	No	The user will capture the email address of the user in this field. 
+	Address Line 1	Text Field 	String 	Yes	If a physical address is required and If the organisation admin indicated that each user in a group must provide an address, this field will be displayed. 
+If a physical address is required but each group member does not need to provide and address, the group member will be assigned the default address for the group. Otherwise, this field will not be displayed.  
+	Address Line 2	Text Field 	String 	Yes	If a physical address is required and If the organisation admin indicated that each user in a group must provide an address, this field will be displayed. 
+If a physical address is required but each group member does not need to provide and address, the group member will be assigned the default address for the group. Otherwise, this field will not be displayed.  
+	Address Line 3	Text Field 	String 	Yes	If a physical address is required and If the organisation admin indicated that each user in a group must provide an address, this field will be displayed. 
+If a physical address is required but each group member does not need to provide and address, the group member will be assigned the default address for the group. Otherwise, this field will not be displayed.  
+	Post Code	Text Field 	String 	Yes	If a physical address is required and If the organisation admin indicated that each user in a group must provide an address, this field will be displayed. 
+If a physical address is required but each group member does not need to provide and address, the group member will be assigned the default address for the group. Otherwise, this field will not be displayed.  
+	Country 	Text Field 	String 	Yes	If a physical address is required and If the organisation admin indicated that each user in a group must provide an address, this field will be displayed. 
+If a physical address is required but each group member does not need to provide and address, the group member will be assigned the default address for the group. Otherwise, this field will not be displayed.  
+	Group Administrator 	Checkbox			If the user is intended to be an administrator for the group, the group admin will check this box. For family groups, the box will be checked for adult members by default. If the user being created is a Junior, the box should not be allowed to be checked. 
+	Email Contact	Checkbox			If the user is intended to be an email contact, the admin user should check this box. If the box is checked, the email address field should be validated to ensure it contains a valid email address. If the user being created is a Junior, the box should not be allowed to be checked.  
+	Cancel 	Button			This button will be used by the group admin to cancel the addition of a member to the group. Once clicked, the window should be closed, and the user should be navigated back to the “My Groups” page. 
+	Confirm	Button			This button is used to confirm the addition of the member. Once clicked, the member captured should be created and linked to the group and organisation. If the organisation admin configured a member form for this type of membership, the admin should be navigated to a page where they can complete the form information. They should also get a warning if the newly created member is not covered by existing subscriptions the group holds. 
+
+
+Account Balance
+The account balance page is the page that the user will be navigated to once they click on the view button of the “Account Balance” section of the “My Home” page. 
+The page will contain the following fields at the top. 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Account Balance Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “Account Balance”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+	Filter 	Text Field	String	N/A	This field will be populated by the application with the text “Filter”
+	Filter Options	Radio 	-	All Time 
+-	This Month
+-	This Year 
+-	Custom 	No	The user will use this field to filter information that is seen in the tables below. 
+By default, the All-Time option will be checked. 
+	Date From	Calendar Drop Down 			This field should be displayed when the user chooses the custom filter option. Once a data is selected, the application should filter out items in the table that occurred before this date. 
+	Date to	Calendar Drop Down			This field should be displayed when the user chooses the custom filter option. Once a data is selected, the application should filter out items in the table that occurred after this date.
+
+The tables below this section will consist of the following columns: 
+
+Column Name	Column Type	Column Data Type	Column Rules
+Date	TextField	String	There should be no date for opening and closing balances. For orders the date that the order was created will be displayed. For cancellations the date that the item / order was cancelled should be displayed. For payments/refunds the date of the payment/refund should be displayed. 
+Description 	TextField	String	The first row should say “Closing Balance”
+For orders this row should contain the order number, which should be clickable to navigate the user to the order page.
+For Cancellations/Partial cancellations it should contain the text “Cancellation/partial cancellation of order [number]” the order number should be clickable to direct the user to the order page for that order. 
+For payments the column should show the text “Payment/partial payment for order [number]” or “Payment to account Balance”
+If a payment is made for  multiple orders, each should be shown on a different line. 
+For refunds, this column should contain the text “Refund/partial refund of order [number].”
+If a payment is made to refund multiple orders, each should be shown on a different line
+Order / Cancellation Amount	TextField	String	The column will contain the currency amount of the order or cancellation. Cancelations will be displayed in red.
+Payments From / To You	TextField	String	This column will show the currency amount of the payment. Payments to you will be shown in red. 
+Balance	TextField	String	The balance amount. The amount should be positive if the organisation owes the user and negative if the user owes the organisation. Negative amounts should be shown in red. 
+
+The entries in the table should be sorted in order of the most recent payment to the least recent payment. The table should show up to 20 rows at a time and the user should be allowed to click through pages to see the other rows. 
+
+Saved Payments Methods
+The saved payment method page will contain the user’s saved payment methods. The user will be directed to this page after they click on the view button of the Saved Payments Method section of the “My Home” page. This page will contain details on the payment methods that have been selected by the user for themselves.  
+The page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Saved Payment Methods Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “Saved Payment Methods”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Payment Methods Heading	Text Field 	String 	N/A	This field will be populated by the application with the payment method e.g. Direct Debit Mandate.  
+
+For each payment method there will be a table containing information about the saved payment method. 
+For Direct Debits the table will consist of: 
+
+Column Name	Column Type	Column Data Type	Column Rules
+GoCardless Mandate	TextField	String	This column will contain the GoCardless mandate ID.
+GoCardless User	TextField	String	This column will contain the name and email address the user used for GoCardless. 
+Setup Date 	TextField	String	This column will contain the date that the user set up the mandate on GoCardless. 
+Status	TextField	String	This column will contain the status of the GoCardless Mandate. If the status is cancelled, the date that the mandate was cancelled should be displayed in brackets. 
+Cancellation Link 	Link		This column should be populated with a link to cancel the GoCardless mandate. Once clicked, the application should display a warning message to the user. If the user confirms that they want to cancel, an API call will be triggered to GoCardless to cancel the mandate. 
+
+For Bank Transfer the table will consist of: 
+Column Name	Column Type	Column Data Type	Column Rules
+Payment Reference	TextField	String	This column will contain the payment reference that was generated for this user. 
+
+My Profile 
+The “My profile” page is the page that users will be navigated to once they select the view button on the My Profile portion of the “My Home” page. 
+The My profile will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	My Profile Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Profile”. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page. 
+
+There will be a table that contains the following information: 
+
+Column Name	Column Type	Column Data Type	Column Rules
+Title 	TextField	String	This column will contain the Title of the user, if available. 
+First Name 	TextField	String	This column will contain the first name of the user. 
+Last Name 	TextField	String	This column will contain the last name of the user. 
+Email Address	TextField	String	This column will contain the email address of the user. 
+Physical Address	TextField	String	This column will contain the physical address of the user. If the user has multiple physical addresses provided, there should be an indicator next to the address that was selected as the primary address.  
+Actions 	Buttons		This column will contain buttons to allow the user to update their details, change their default address, and reset their password. If they click on the update button, they should be presented with a window with their details, allowing them to update their details. If they select the reset password button, the user will be presented with a screen allowing them to reset their password. If they click on the button to change their default address, they should be presented with a window displaying the three addresses and allowing them to select and confirm the address they want to use as their default address. 
+
+The window allowing the user to reset their password will be displayed to the user once they click on the button to reset their password. This window will consist of the following fields: 
+ 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Email Address	Text Field 	String 	Yes	This user will use this field to enter the email address associated with their account. The application should validate that the email entered is a valid format for an email address.  
+	Submit 	Button			The user will select this button to submit the email address they have entered. Once clicked, the application must verify that the email is associated with their account. If it is, the application should email a password reset link to the email address and inform the user of this. This will then follow the normal password reset process. 
+If it is not, the user should be shown a message informing them that the email address they have captured is not recognised.
+	Cancel 	Button			The user will select this button to cancel the password reset process. Once clicked, the user will be navigated back to the “My Profile” page. 
+
+The window allowing a user to edit their details will be presented to them when they click the button to update their details. The window will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Picture	Upload			The user will use this field to upload their profile picture. Once this is clicked, the application should present the a window the to the user allowing them to navigate to a folder location to pick a photo for uploading.
+	Title 	Drop down menu	-	Titles	No	This user will use this field to enter the email address associated with their account. The application should validate that the email entered is a valid format for an email address.  
+	First Name 	TextField	String	No	This field will be populated with the user first name. The user will be able to edit this field to change their first name. 
+	Last Name 	TextField	String	No	This field will be populated with the user lasf name. The user will be able to edit this field to change their last name.
+	Email Address	TextField	String	No	This field will be populated with the user email address. The user will be able to edit this field to change their email address.
+	Address Line 1	TextField	String	No	This field will be populated with the first line of the user address for each of addresses linked to their profile. 
+The user will be able to edit this field to change their address first lines.
+	Address Line 2	TextField	String	No	This field will be populated with the second line of the user address for each of addresses linked to their profile. 
+The user will be able to edit this field to change their address second lines.
+	Address Line 3	TextField	String	No	This field will be populated with the third line of the user address for each of addresses linked to their profile. 
+The user will be able to edit this field to change their address third lines.
+	Post Code 	TextField	String	No	This field will be populated with the post code of the user address for each of addresses linked to their profile. 
+The user will be able to edit this field to change their address post codes.
+	Country 	TextField	String	No	This field will be populated with the country of the user address for each of addresses linked to their profile. 
+The user will be able to edit this field to change their address countries.
+	Confirm 	Button			The user will use this button to confirm the changes. If the user has updated their email address, the application should present a message to the user informing them that a confirmation email has been sent to the email address and they will be required to log in before the email address is confirmed. 
+	Cancel	Button			The user will use this button to cancel any updates. Once clicked, the user will be navigated back to the “My Profile” page and any changes will be ignored. 
+
+
+My Membership Form
+The “My Membership Form” page will be the page that the user is navigated to when they click on the button next to the form on the “My Home” page.
+The page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	My Membership Form Page Heading	Text Field 	String 	N/A	This field will be populated by the application with the text “My Membership Form”. 
+	Membership Form Fields	Various 	Various 	Various 	These fields will consist of the fields in the membership form that had been set up by the organisation admin. The user will be able to edit these fields to update the information. 
+	Confirm 	Button		N/A	The user will select this button to confirm the changes they have made. Once clicked, the user should be presented with a message asking them to confirm that they want to proceed. If they proceed, the changes made should be committed and the last updated date on the unexpanded section of the “My Home” page should be updated to the latest date. 
+	Back 	Button		N/A	This button will be used to navigate back to the “My Home” page. Once clicked, the user will be navigated back to the “My Home” page and any changes made to the form data will be discarded. 
+
+
+
+
+
+Application Admin Users
+Application admin users will manage aspects of the application.  
+Application Administration Home
+The application administrator will land on a dashboard page once they have signed into the application. The dashboard will consist of the following metrics: 
+
+-	Organisations:
+o	New Organisations Created (Card Daily)
+o	Organisations Exceeding Price Bracket Limits (Card Daily)
+o	Organisations Whose Free Trails are Ending (Card Daily)
+-	 Finance:
+o	Order Revenue 
+o	Transaction Revenue
+o	Subscription Revenue
+o	Invoices Due 
+-	Total Members (Card)
+-	New Orders (Card – Daily) 
+
+Side Menu
+The side menu on the dashboard will include links to the following: 
+-	Content Management 
+-	Organisations 
+-	Members 
+-	Orders
+-	Communication
+-	Finance 
+-	Job Scheduling
+-	Audit Logs 
+
+Content Management
+The application administrator user will be allowed to configure the content of the public pages of the application. 
+Membi Public Pages
+The Membi public pages will consist of tabs for the:
+-	Help Section 
+-	Demos
+ 
+In the Help tab, the application administrator will have the option to manage help articles. The page will consist of an existing articles table and buttons to allow the application administrator to create a new category, new sub category and new article. 
+The existing article table will consist of the following columns: 
+ 
+Column Name	Column Type	Column Data Type	Column Rules
+Article Title 	Text Field 	String 	This column will contain the Title of the article.  
+Audience	Text Field 	String 	This column will contain the intended audience of the article, either “Member Help” or “Admin Help”
+Article Category 	Text Field 	String 	This column will contain the category that the article was assigned to. 
+Article Subcategory 	Text Field 	String 	This column will contain the subcategory that the article was assigned to. 
+Created By	Text Field 	String 	This column will contain the name of the person who created the article.  
+Created Date	Text Field 	String 	This column will contain the date that the article was created. 
+Last Update	Text Field 	String 	This column will contain the date that the article was last updated.  
+Updated By	Text Field 	String 	This column will contain the name of the person who last updated the article.  
+Actions	Buttons		This column will contain buttons for the application admin users to view, edit, and delete the help articles. 
+If the view button is clicked, a window should be presented to the application administrator, allowing them to view the contents of the help article. 
+If the edit button is clicked, a window allowing the application administrator to edit the article will be presented to them.
+If the delete button is clicked, the article should be deleted and removed from the help section of the Membi public website.  
+
+The window for the new category creation will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Audience 	Radio  	-	Member Help
+-	Admin Help	Yes	The application admin will use this field to select whether the category will be part of Member help or Admin Help.   
+	Category	Text	String	Yes	The application administrator will use this field to capture the name of the new category. 
+	Cancel 	Button			The application administrator will use this button to cancel the new category creation. Once clicked, the application administrator will be navigated back to the help article page.
+	Submit	Button			The application administrator will use this button to confirm the new category creation. Once clicked, the application administrator will be navigated back to the help article page and the category will be linked to the Member help. 
+
+The window for new subcategory creation will consist of the following fields:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Category	Drop Down Menu	Categories	Yes	The application administrator will use this field to select the category that the new subcategory will belong to. 
+	Sub- Category	Text	String	Yes	The application administrator will use this field to capture the name of the new subcategory. 
+	Cancel 	Button			The application administrator will use this button to cancel the new subcategory creation. Once clicked, the application administrator will be navigated back to the help article page.
+	Submit	Button			The application administrator will use this button to confirm the new category creation. Once clicked, the application administrator will be navigated back to the help article page and the category will be linked to the Member help. 
+
+The window for creating a new article was consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Audience 	Radio  	-	Member Help
+-	Admin Help	Yes	The application admin will use this field to select whether the article will be part of Member help or Admin Help.   
+	Category	Drop Down Menu	-	Categories	Yes	The application administrator will use this field to select the category that the new article will belong to. The categories in the drop-down menu must be filtered to show those that are linked to the selected audience.
+	Sub- Category	Drop Down Menu	-	Sub-categories	No	The application administrator will use this field to select the sub-category that the new article will belong to. The sub-categories in the drop-down menu must be filtered to show those that are linked to the selected category. 
+	Article Text	Text Editor	String	Yes	The application administrator will use this field to capture the text of the article. 
+	Cancel 	Button			This button will be used by the application administrator to cancel the article. Once clicked, the user should he navigated back to the content management page. 
+	Submit	Button			This button will be used by the application administrator to submit the article. Once clicked, the application will publish the article in the correct section of the help page based on the categories and audience selected by the application administrator. 
+
+Demos
+In the demos tab their will be buttons to publish a new demo video and a table of the existing demo videos. 
+The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Demo Title 	Text Field 	String 	This column will contain the Title of the article.  
+Demo Description 	Text Field 	String 	This column will contain the demo description. 
+Creator	Text Field 	String 	This column will contain the name of the person who created the demo.  
+Create Date	Text Field 	String 	This column will contain the date that the demo was created. 
+Update Date	Text Field 	String 	This column will contain the date that the demo was last updated.  
+Updated By 	Text Field 	String 	This column will contain the name of the person who last updated the demo.  
+Video URL 	Text Field 	String 	This column will contain the embed URL  of the demo video..  
+Actions	Buttons		This column will contain buttons for the application admin users to view, edit, and delete the demos. 
+If the view button is clicked, a window should be presented to the application administrator, allowing them to view the demo. 
+If the edit button is clicked, a window allowing the application administrator to edit the demo will be presented to them.
+If the delete button is clicked, the demo should be deleted and removed from the demo section of the Membi public website.  
+
+The application administrator will be navigated to the create demo window when they click on the “Create New” button on the demo tab. The window will consist of the following fields. 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Demo Title	Text Field	String	Yes	The application administrator will use this field to capture the title of the demo.
+	Demo Description 	Text Field	String	Yes	The application administrator will use this field to capture the description of the demo. 
+	Embed URL 	Text Field	String	Yes	The application administrator will use this field to capture the embed URL from Youtube to embed the video in the Membi Demo page for that video. 
+	Cancel 	Button			The application administrator will use this button to cancel the capturing of the demo. Once clicked, the application administrator will be navigated back to the public pages screen.
+	Publish	Button			The applicateion adminsistrator will use this button to publish the demo to the membi public page. Once clicked, the application will publish the video to the membi demo page.  
+
+Tool Tips
+The tool tips tab In the content management section will consist of a button to capture a new tooltip. It will further consist of a table detailing the tooltips that have been created. The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Tooltip ID 	Text Field 	String 	This column will contain the id of the tooltip. 
+Page 	Text Field	String	This column will contain the name of the page where the tooltip appears. 
+Field	Text Field	String	This column will contain the name of the field on the page where the tool tip appears.
+Text 	Text Field 	String	This column will contain the text that appears in the tooltip. 
+Actions	Buttons		This field will contain buttons allowing the user to edit a tooltip and remove a tooltip. 
+If the button to edit is clicked, the application will present a window to the application admin that will allow them to edit the tooltip. 
+If the button to remove the tooltip is clicked, the application will remove the tooltip from the application. 
+
+The application administrator will be navigated to the tooltip creation window when they click on the new tooltip button. The window will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Page	Dropdown Menu	-	Pages	Yes	The application administrator will use this field to capture the page where the tooltip will appear. 
+	Field 	Dropdown Menu	-	Fields	Yes	The application administrator will use this field to capture the field where the tooltip will appear. The dropdown menu should be filtered to show the fields that appear on the selected page. 
+	Text	Textfield	String	Yes	The application administrator will use this field to capture the text that will appear in the tooltip. 
+	Cancel 	Button			This button will be used to cancel the capturing of the tooltip. Once clicked, the user will be navigated back to the content management page. 
+	Confirm	Button			This button will be used to confirm the capturing of the tooltip. Once clicked, the tooltip will be saved and will be pulled through to the front end. 
+
+
+Organisations 
+The system administrator will be navigated to the organisations page once they click on the organisations link in the side menu. 
+The organisation list will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Organisations Page heading	Text Field	String	N/A	This field will be populated by the application with the text “Organisations”. 
+	Search	Search			This field will be used by the application admin. The application should allow the application admin to enter organisations names and filter the table to show organisations who meet the search criteria. 
+	Filter	Radio	-	Free Trail 
+-	Live
+-	All		This field will be used by the application admin to filter the organisations displayed in the table. If the application admin selects Free Trail, only organisations who are on a free trail should be displayed. Of the application admin selects Live, only the organisations who are live should be displayed. By default, it will show all. 
+	Featured Club	Radio	-	Yes 
+-	No 
+-	Show All		This field will be used by the application to filter the organisations shown in the table to those that are a featured club, not a featured club. By default, it will show all all.
+	Hidden 	Radio	-	Yes 
+-	No 
+-	Show All		This field will be used by the application admin to filter the organisations shown in the table to those that are hidden, not hidden, and all. By default, all will be shown. 
+	Admin Blocked	Radio	-	Yes 
+-	No 
+-	Show All		The application administrator will be able to use this field to filter the organisation in the table to show organisations whose administrators have been blocked, have not been blocked and all organisations. By default, all will be selected.
+	View	Radio	-20
+-100		This field will be used by the application admin to select how many organisations to display at a per page in the organisation table. If 20 is selected, 20 organisations should be displayed in the table. If 100 is selected, 100 organisations should be displayed in the table. By Default 20 will be selected. 
+	Back 	Button			This button will be used by the application admin to navigate back to the homepage. Once clicked, the application admin should be navigated back to the homepage. 
+
+
+
+
+
+The organisations page will consist of the following table: 
+Column Name	Column Type	Column Data Type	Column Rules
+Name 	Text Field 	String 	This column will contain the name of the organisation.  
+Shortname	Text Field 	String 	This column will contain the short name of the organisation.  
+Time Created	Text Field 	String 	This column will contain the date and time that the organisation was created. 
+Last Admin Login 	Text Field 	String 	This column will contain the date and time of the last time an admin user of the organisation logged in.
+Members 	Text Field 	String 	This column will contain the number of members that are linked to the organisation. 
+Orders 	Text Field 	String 	This column will contain the amount of orders the organisation has. 
+Renewal 	Text Field 	String 	This column will contain a “Yes” if the club is renewing and a “No” if the club is not renewing. 
+Actions 	Buttons		This column will contain buttons to View the organisation, clear down organisation data, and delete the organisation. 
+If the view button is clicked, the application admin will be navigated to the organisation view page. 
+If the clear down button is clicked, the application admin will be presented with a window allowing them to select all or specific data to clear down. 
+If the delete organisation button is clicked, the application admin will be presented with a warning and once they confirm the action, the organisation and member data will be soft deleted. Details of the invoices for this organisation should not be deleted. 
+
+Organisation page
+The application admin will be navigated to the organisation page when they click on the view button on the organisations table. 
+The organisation page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Organisation Page heading	Text Field	String	N/A	This field will be populated by the application with the name of the organisation.  
+
+The organisation details section of the page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Organisation Name	Text Field	String	N/A	This field will be populated by the application with the name of the organisation.  
+	Organisation Shortname	LInk		No	This field will be populated by the application with the shortname of the organisation.  The shortname should be clickable, allowing the admin to navigate to the organisation public page. 
+	Organisation Website	Text Field	String	N/A	This field will be populated by the application with the website of the organisation, if one was provided. 
+	Organisation Email 	Text Field	String	N/A	This field will be populated by the application with the email of the organisation.  
+	Organisation Phone	Text Field	String	N/A	This field will be populated by the application with the phone number of the organisation.  
+	Organisation Address	Text Field	String	N/A	This field will be populated by the application with the address of the organisation, if one was provided, in the format:
+Address Line 1 
+Address Line 2
+Address Line 3
+Post Code 
+Country 
+	Action	Button			These buttons will allow the application admin to edit the organisation to edit the organisation shortname and make the organisation a featured club. Once the edit button is clicked, the organisation short name field should become editable and the application admin should be allowed to change the short name and once saved, the organisation URL will be updated and an email will be sent to the organisation administrator. 
+Once the make a feature club button is clicked, a link to the club public page will be put into the featured clubs section of the home page. 
+
+The administrators section of the page will consist of buttons to add an admin member to the organisation. The page will further consist of a table that has the following information:
+
+Column Name	Column Type	Column Data Type	Column Rules
+Name 	Text Field 	String 	This column will contain the name of organisation admin. 
+Email 	Text Field 	String 	This column will contain the email address of the organisation admin. 
+Role 	Text Field 	String 	This column will contain the role of the organisation admin.   
+Last Login	Text Field 	String 	This column will contain the date and time of the last time the organisation admin logged in.   
+Actions	Buttons		This column will contain buttons to Remove an admin, promote the admin to super user (if they are not a super user). 
+
+The application admin will be able to add administrators to the organisation from this page. Once it is clicked, the application will present the application admin with a window that contain the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Member Name	Drop Down Menu 	-	Member names	N/A	The application admin will use this field to select the member who will be added as an administrator to the organisation. The user will be able to search through the drop down menu to filter the results of the drop down menu.  
+
+Once the application admin has selected a member, they will be presented with the screens to manage the member’s access. This will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Access Role 	Drop Down Menu 	-	Read Only
+-	Admin 
+-	Super Admin	Yes	The application admin will use this field to select the level of admin access that the user will have. 
+	Confirm	Button			The application admin will use this button to confirm their selection. Once clicked, the application should promote the user to an admin user with the default permissions for their access role, send an email to the organisation email to inform them and send an email to the member to inform them. 
+	Cancel	Button			This button will be used by the application admin to go back. Once clicked, the application admin should be navigated back to the organisation page. 
+
+The application admin should then be able to create specific permissions for the admin member just like the organisation administrator would. 
+
+The emails section of the page will consist of buttons to send an email to the organisation. The page will further consist of a table that has the following information:
+
+Column Name	Column Type	Column Data Type	Column Rules
+Email ID 	Text Field 	String 	This column will contain the ID of the email. 
+Subject	Text Field 	String 	This column will contain the subject of the email. 
+Number of Recipients	Text Field 	String 	This column will contain the number of recipients that the email was sent to. 
+Sent Time	Text Field 	String 	This column will contain the date and time that the email was sent. 
+Open Rate	Text Field 	String 	This column will contain the percentage of recipients who opened the email. 
+Action	Button		This column will contain a button to view the email that was sent. Once clicked, the application should present the application admin with a window that displays the email content. 
+
+If the user elects to send an email. They will be presented with a window that will allow them to build the email. The window will consist of the following fields: 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Send To 	Multi Select List 	-	Organisation Administrators	Yes	This field will be populated with the names of the administrators for the organisation. The application admin will be able to select the administrators that they wish to receive the email. 
+	Template	Drop Down	Templates	No	This field will be populated with the email templates that the application admin had created previously. If one is selected, the email text should be populated with the text of the template email. 
+	Subject	Text Field	String	Yes	This field will be used by the application admin to capture a subject line for the email.  
+	Text	Text Field	String	Yes	This field will be used by the application admin to edit the email that they want to send. The application admin will be allowed to use tags. 
+	Preview	Button			The application admin will use this button to view a preview of the email. Once clicked, the user will be presented with a window where they can see the email. 
+	Cancel	Button			The application admin will use this button to cancel. Once clicked, the email should be discarded, and the application admin user should be navigated back to the organisation page. 
+	Save as template	Button			The application admin will use this button to save the email as a template. Once selected, the application admin will be presented with a window to enter the template name and save the template. 
+	Send	Button			The application admin will use this button to send the email. Once clicked, the application should validate that recipients were selected and that the email body contains content. If either of these validations fail, the user will be presented with a message warning them of this. If the validations pass, the email will be sent to the recipients. 
+
+The recent orders section of the page will consist of the following table of the last 10 orders: 
+Column Name	Column Type	Column Data Type	Column Rules
+Order Number	Text Field 	String 	This column will contain the ID of the order.
+Time	Text Field 	String 	This column will contain the date and time that the order was made. 
+Purchaser	Text Field 	String 	This column will contain the name of the purchaser of the order. 
+Amount 	Text Field 	String 	This column will contain the amount of the order. 
+Payment Method	Text Field 	String 	This column will contain the payment method that was used to pay for the order. 
+Order Status	Text Field 	String 	This column will contain the current status of the order
+Actions	Buttons		This column will contain buttons to allow the organisation admin to clear down the order. This button should not be available if the payment method is Direct Debit and the order status is Order Placed or Payment Received. 
+If clicked, the order, payment and booking (for events) should be cleared and an audit trail entry should be made for the application admin to track who cleared down the order. 
+
+
+
+
+
+
+
+
+
+
+Clear down page
+The user will be presented with this window once they click on the clear down button on the organisations table. 
+The window will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Clear Down 	Radio Button 	-	All Data 
+-	Specific Data	Yes	The application admin will use this field to select the data they want to delete.  
+	Orders, Payments, Event Bookings and Account Balances	CheckBox			This field will be displayed if the application admin selects the specific data radio button. The application admin will select this if they want to delete the data for these specific items from an organisation. 
+	Subscriptions	CheckBox			This field will be displayed if the application admin selects the specific data radio button. The application admin will select this if they want to delete the data for subscriptions specifically. 
+	Form Data	CheckBox			This field will be displayed if the application admin selects the specific data radio button. The application admin will select this if they want to delete the data for subscriptions specifically.
+	Members	CheckBox			This field will be displayed if the application admin selects the specific data radio button. The application admin will select this if they want to delete the data for members specifically.
+	Emails	CheckBox			This field will be displayed if the application admin selects the specific data radio button. The application admin will select this if they want to delete the data for emails specifically.
+	Cancel	Button			This button will be used by the application admin to cancel the clear down. Once clicked, the application admin should be navigated back to the organisation page
+	Confirm	Button			The application admin will use this button to confirm their selection. Once clicked, the application should remove the indicated data for that organisation. 
+
+Members
+The application administrator will be navigated to the members section of the application after clicking on the members link in the side menu on the application administrator home page. 
+The members members section will consist of a button to add a new member, a search box to search for a member and a table detailing the members on the application. 
+The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+First Name  	Text Field 	String 	This column will contain the first name of the member. 
+Last Name 	Text Field 	String 	This column will contain the last name of the member.
+Email Address 	Text Field 	String 	This column will contain the email address of the member.
+Last Login	Text Field 	String 	This column will contain the date and time that the member last logged in. 
+Created 	Text Field 	String 	This column will contain the date and time that the member profile was created. 
+Updated 	Text Field 	String 	This column will contain the date and time that the member profile was last updated. 
+Invalidated 	Text Field 	String 	This column will contain the date and time that the member profile was deleted. 
+Organisations 	Text Field 	String 	This column contains the organisations that the member is linked to. 
+Actions	Buttons		This column will contain action buttons for the application administrator to view a member profile, delete a member profile, view the audit trail for the member and view the login history. If the view button is clicked, the application admin will be directed to the member page for that member. If the delete button is clicked, the application should present a warning message to the user. Once they confirm, the application should remove the user profile. If the audit trail button is clicked, the application will direct the application administrator to the Audit trail page for that member. If the view login history is clicked, the application will direct the application administrator to a page containing the login history for the last 6 weeks. 
+
+If the add a member button is clicked, the application administrator will be presented with a page allowing them to capture the basic user details and link them to an organisation. Once created, the user and administrator will be notified via email. 
+
+Orders 
+The application administrator will be navigated to the orders section of the application after clicking on the orders link in the side menu on the application administrator home page. 
+The orders section will consist of a table detailing the members on the application. 
+The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Organisation   	Text Field 	String 	This column will contain the name of the organisation. The user will click on the organisation name to be navigated to the organisation page. 
+Order 	Text Field 	String 	This column will contain the order number of the order.  The user will click on the order number to be navigated to the order page.
+Member 	Text Field 	String 	This column will contain the first name and surname of the member who the order was assigned to. The user will click on the member name to be navigated to the member page.
+Total 	Text Field 	String 	This column will contain the total of the order. 
+Date Placed	Text Field 	String 	This column will contain the date and time that the order was placed. 
+Order Status 	Text Field 	String 	This column will contain the status of the order.  
+Payment Method	Text Field 	String 	This column will contain the payment method used to pay for the order. 
+Bank Reference 	Text Field 	String 	This column will contain the bank reference that was assigned to the member who made the order. This column is only populated if the payment method is Bank Transfer. 
+
+Communications
+The application admin will be navigated to the communications page by clicking on the communications link in the side menu. This page will consist of buttons to create a new email, once clicked, the application administrator will be presented with a window the capture and send the email. 
+Create Email 
+The create email page will be displayed to the application administrator when they click the button to create a new email. This page will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Send To (Mailing List)	Drop Down	-	Mailing Lists	No	This field will be populated with the names of the mailing lists that has been created by the application admin. If the application admin selects a mailing list, the members of that mailing list should be populated in the recipients page. The application should filter out admin users who have not logged in for the last six months.
+	Send To (Organisations)	Multi Select List 	-	All 
+-	Organisations	No	This field will be populated with the names of the organisations on the platform. The application admin will be able to select the organisations that they wish to receive the email. If the application administrator selects the “all” option, all organisation administrators will be added to the recipient list. For the organisations selected, the administrators of that organisation will be available for selection from the administrators list.  The application should filter out admin users who have not logged in for the last six months. 
+	Send To (Administrators)	Multi Select List 	-	Organisation Administrators	No	This field will be populated with the names of the administrators for the organisation selected in the list above. The application admin will be able to select the administrators that they wish to receive the email. The application should filter out admin users who have not logged in for the last six months.  
+			-			
+			-			
+	Template	Drop Down	Templates	No	This field will be populated with the email templates that the application admin had created previously. If one is selected, the email text should be populated with the text of the template email. 
+	Subject	Text Field	String	Yes	This field will be used by the application admin to capture a subject line for the email.  
+	Text	Text Field		Yes	This field will be used by the application admin to edit the email that they want to send. 
+	Cancel	Button			The application admin will use this button to cancel. Once clicked, the email should be discarded, and the application admin user should be navigated back to the organisation page. 
+	Save as template	Button			The application admin will use this button to save the email as a template. Once selected, the application admin will be presented with a window to enter the template name and save the template. 
+	Send	Button			The application admin will use this button to send the email. Once clicked, the application should validate that recipients were selected and that the email body contains content. If either of these validations fail, the user will be presented with a message warning them of this. If the validations pass, the email will be sent to the recipients. 
+	Schedule Send	Calendar Drop Down	Date Time	No	This field will allow the application admin to select a date and time in the future for the email to be sent.  
+ 
+
+Emails Sent
+The emails sent section of the communication page will consist of the following table: 
+Column Name	Column Type	Column Data Type	Column Rules
+Email ID 	Text Field 	String 	This column will contain the ID of the email. 
+Organisation	Text Field 	String 	This column will contain the name of the organisation to which the email was sent.  
+Subject	Text Field 	String 	This column will contain the subject of the email. 
+Number of Recipients	Text Field 	String 	This column will contain the number of recipients that the email was sent to. 
+Sent Time	Text Field 	String 	This column will contain the date and time that the email was sent. 
+Open Rate	Text Field 	String 	This column will contain the percentage of recipients who opened the email. 
+Action	Button		This column will contain a button to view the email that was sent. Once clicked, the application should present the application admin with a window that displays the email content. 
+
+Email Templates
+The email templates section of the page will consist of a button to create a new template and a table listing the templates that have been created. When the application administrator clicks on the button to create a template they will be presented with a window to create the template and save it. 
+The table for email templates will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Template Name 	Text Field 	String 	This column will contain the name of the template. 
+Created By	Text Field 	String 	This column will contain the name of the application admin that created the template. 
+Created	Text Field 	String 	This column will contain the date and time that the email template was created.  
+Last Updated	Text Field 	String	This column will contain the date and time that the email template was last updated. 
+Updated By 	Text Field 	String 	This column will contain the name of the application admin that updated the template. 
+Actions	Button		This column will contain buttons for the application administrator to view the template, edit the template and delete the template. 
+If the edit button was clicked, the application admin will be presented with a window where they can edit the content of the template. Once the template is updated, the last updated date and time should be updated. 
+If the view button is clicked, the application admininstrator will be presented with a screen that allows them to view the template.
+If the delete button is clicked, the template will be deleted from the list of templates. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Finance
+The application administrator will be navigated to the finance page. The finance page will consist of the following fields: 
+
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Finance Section Heading	TextField	String	N/A	The application will populate this field with the text “Finance” 
+	Back 	Button		N/A	This button will be used by the application administrator to navigate back to the application admin home page. 
+	Debtors 	TextField	String	N/A	This field will be populated by the application with the amount that is outstanding to Membi. 
+	Creditors	TextField	String	N/A	This field will be populated by the application with the amount that is owed by Membi. 
+	Account Search	Search Field			The application administrator will use this field to search for a organisation account. The application will present the organisations that meet the search criteria. If the user clicks on an organisation, the user is navigated to the club account page. 
+
+Below these fields will be filters that allow the user to filter the results in the table. The filteres will consist of the following: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Invoice Due	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application will use this field to filter organisations in the table to those who need to be invoiced, those who do not, and all organisations, by default all will be shown. 
+	Retired 	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the results in the table by organisations that have been deleted, not deleted, and all. By default, no will be selected.   
+	Free Trail	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the results in the table by organisations that are on a free trail, not on a free trail retired, and all organisations.
+By default, all will be selected.    
+	Member Bracket Exceeded	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the results in the table by organisations that have exceeded the number of members allowed by their current subscription plan, not exceeded the number of members allowed by their current subscription plan, and all organisations.
+By default, no will be selected.   
+	Unpaid Embed / API	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the organisation in the table to show those who have paid for their embed or API feature, those who have not and all organisations. 
+By default, all will be shown. 
+	Over Transaction Limit	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the organisation in the table to show those who are over their transaction limit, those who are not, those who are not, and all organisations. 
+By default, all will be shown.  
+	Blocked 	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the organisation in the table to show organisations whose administrators have been blocked, have not been blocked and all organisations. By default, all will be selected. 
+	Renew	Radio Button	-	Yes 
+-	No 
+-	Show All	N/A	The application administrator will be able to use this field to filter the organisation in the table to show organisations whose subscription will be renewed, will not be renewed, and all organisations. By default, all organisations will be selected.  
+	Account Balance 	Radio Button 	-	Positive 
+-	Negatice
+-	Non-Zero 
+-	Zero
+-	All	N/A	The application administrator will be able to use this field to filter the organisation in the table to show organisations that have a positive account balance, negative account balance, non-zero account balance, zero account balance and all organisations. By default, all will be shown. 
+
+Below this will be a table showing the organisation accounts consisting of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+CheckBox 	CheckBox 		This column will contain a checkbox allowing the user to select an organisation. The Checkbox in the column name row will be used to select all organisations.  
+Shortname	Textfield	String	This column will contain the organisation shortname. The text should be clickable and once clicked, will navigate the application admin to the organisation public page. 
+Name	Textfield	String	This column will contain the organisation name. 
+Blocked	Textfield	String	This column will contain a “Yes” if the organisation admins have been blocked and a “No” if they have not. 
+Renew	Textfield	String	This column will contain a “Yes” if the organisation subscription needs to be renewed and “No if it doesn’t.  
+Invoice Due	Textfield	String	This column will contain a “Yes” if the organisation has to be invoiced and “No” if they do not. The text should be clickable. Once it is clicked, the application will calculate the member subscription amount (the difference between the price of the new bracket and the current bracket if the organisation’s subscription is still current), premium feature amounts, and transaction amounts that are due for the organisation, it will then populate an invoice with the amount that due with the date that is one day after the end date of the organisations current subscription. The invoice generated will be presented to the application admin where they can delete items before submitting it.
+Balance 	Textfield	String	This column will contain the balance of the organisation account. 
+Members	Textfield	String	This column will contain a the amount of members that the organisation has.  If the members is more than 5% higher than the subscription bracket number, it should be coloured in red. 
+Subscription Bracket	Textfield	String	This column will contain the maximum number of members that the organisation can have on their current subscription. 
+Start of paid plan	Textfield	String	This column will contain the date that the organisation exited the free trail. 
+Subscription Expires	Textfield	String	This column will contain the date that the organisation’s subscription will expire. 
+Embed Count	Textfield	String	This column will contain the number of pages that has been embedded.  
+Embed Expires	Textfield	String	This column will contain the date that the organisation’s embed subscription will expire. 
+API Count	Textfield	String	This column will contain the number of APIs that the organisation has activated. 
+API Expires	Textfield	String	This column will contain the date that the organisation’s API subscription will expire. 
+Pay Pal Transactions	Textfield	String	This column will contain the number of PayPal transactions that the organisation has done.  If the number of transactions is greater than 500 transactions it will be coloured in red. 
+Opayo Transactions	Textfield	String	This column will contain the number of Opayo transactions that the organisation has done. If the number of transactions is greater than 300 transactions it will be coloured in red.
+Stripe Transactions 	Textfield	String	This column will contain the number of Stripe transactions that the organisation has done. 
+Orders 	Textfield	String	This column will contain the number of orders that the organisation has received. 
+Last Admin Login	Textfield	String	This column will contain the date that an admin of the organisation had last logged in.  
+Account	Button		The user will use this button to view the organisation’s account page. Once clicked, the application administrator will be navigated to the organisation account page. 
+
+Below this will be two buttons: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Send Invoice	Button		N/A	The application admin will use this button to send an invoice to the selected organisations. Once clicked, the application should generate the invoices and send them to the organisation email address.
+	Clear Down and Remove	Button		N/A	The application admin will use this button to clear down the organisation data and remove them from the application. Once clicked the application will perform the clear down and remove for the selected organisations.
+	Send Email 	Button			The application administrator will use this button to send and email to the organisation email. Once clicked, the application admin should allow the user to select one of the saved templates and send it to the organisation.
+
+The application administrator will be navigated to the invoice page when they click on the invoice due link The invoice page will consist of the following Fields:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Invoice Page Title	Textfield	String	N/A	This field will be populated by the application with the text “New Invoice” followed by the Invoice Number. 
+	Invoice Date	Textfield	String	N/A	This field will be populated by the application with the date that the invoice is being issued. 
+	Items 	Drop Down	-	Invoice Items 	Yes	This drop down will be populated with the items that the organisation can be invoiced for. The application admin will be able to select items that will form part of the invoice. Once selected, they will also be able to remove the item from the invoice. 
+	Amount (excl. vat)	Text Field 	String		This field will be populated by the application with the amount, excluding vat, that is due for the selected item.
+	Amount (incl. vat)	Text Field 	String		This field will be populated by the application with the amount, including vat, that is due for the selected item.
+	Quantity 	Text Field 	String		This field will be populated by the quantity available for the selected item.
+	Total	Text Field 	String		This field will be populated by the total for the selected item (Amount including VAT x Quantity)
+	Sub Total 	Text Field 	String		This field will be populated by the application with the sum of the total excluding VAT for all the items selected. 
+	VAT 	Text Field 	String		This field will be populated by the application with the total amount of VAT charged for each of the items selected. 
+	Total 	Text Field 	String		This field will be populated with the sum of the Sub-total and VAT fields. 
+	Comments	Text Field	String	No	The application administrator will be allowed to capture comments against the invoice. 
+
+Below this, there will be buttons for:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Save & Send 	Button		N/A	The application administrator will use this button to save and send the invoice to the organisation. Once clicked, the application will queue the invoice to be sent to the organisation super admin.
+	Cancel	Button		N/A	This button will be used to cancel the invoice creation. Once clicked, the user will be navigated back to the finance page. 
+
+
+The application administrator will be navigated to the organisation account page when they click on the view button. The organisation account page will consist of the following Fields:
+ 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Organisation Account Page Heading	Textfield	String	N/A	This field will be populated by the application with the text: “Organisation Account” followed by the organisation name. 
+	Balance 	Textfield	String	N/A	This field will be populated by the application with the balance of the club account. 
+	Edit Organisation Account	Button			The application admin will use this button to edit the organisations account. Once clicked, the application admin will be navigated to a page where they can edit the account. 
+	View Organisation	Button			The application admin will use this button to view the organisation page. Once clicked, the application admin will be navigated to the organisation page. 
+	New Invoice	Button			The application admin will use this button to create a new invoice against the organisation. Once clicked, the user will be navigated to the invoice screen to generate the invoice. 
+	New Magic Invoice	Button			The application admin will use this button to generate an invoice that will calculate the member subscription amount (the difference between the price of the new bracket and the current bracket), premium feature amounts, and transaction amounts that are due for the organisation, it will then populate an invoice with the amount that due with the date that is one day after the end date of the organisations current subscription. The invoice generated will be presented to the application admin where they can delete items before submitting it. 
+	New Credit Note	Button			The application admin will use this button to create a new invoice against the organisation. Once clicked, the user will be navigated to the invoice screen to a credit note. 
+
+Below this section will be a table that details a summary of the club account. This table will consist of the following: 
+Column Name	Column Type	Column Data Type	Column Rules
+Members 	Text Field 	String 	This column will be populated with the number of members that has been linked to the organisation. 
+Orders 	Text Field 	String 	This column will be populated with the number of orders that the organisation has received. 
+Last Admin Login 	Text Field 	String 	This column will be populated with the date and time of the last occasion that an organisation logged into Membi, 
+Subscription Price Options 	Text Field 	String 	This column will be populated with the number of subscription price options that the organisation has created.
+Events 	Text Field 	String 	This column will be populated with the number of events bookings that the club has received. 
+Forms 	Text Field 	String 	This column will be populated with the number of forms that the organisation has created. 
+Embedded Pages	Text Field 	String 	This column will be populated with the number of pages that the organisation has embedded. 
+API Count 	Text Field 	String 	This column will be populated with the number of APIs that the organisation has created. 
+Online Payment Methods 	Text Field 	String 	This column will be populated with the online payment methods that the organisation has activated. 
+Paypal Transactions 	Text Field 	String 	This column will be populated with the number of Paypal transactions that the organisation has conducted, 
+Opayo Transactions 	Text Field 	String 	This column will be populated with the number of Opayp transactions that the organisation has conducted,
+Stripe Transactions 	Text Field 	String 	This column will be populated with the number of Stripe transactions that the organisation has conducted,
+
+Below this, there will be a table which will detail the assets of the organisation. The table will contain the following columns:
+ 
+Column Name	Column Type	Column Data Type	Column Rules
+Asset Description	Text Field 	String 	This column will be populated with the name of the service that the organisation uses. (Member Packages, Premium features etc.) 
+Start Date	Text Field 	String 	This column will be populated with the date that the organisation started paying for the asset. 
+End Date 	Text Field 	String 	This column will be populated with the date that the organisation stopped using the asset.
+Units 	Text Field 	String 	This column will be populated with the number of units of the items the organisations have. For member packages, the upper limit of the package plan should be displayed. 
+
+Below this will be a table that details the invoices that have been generated against the organisation 
+Column Name	Column Type	Column Data Type	Column Rules
+Invoice Number	Text Field 	String 	This column will be populated with the name of the service that the organisation uses. (Member Packages, Premium features etc.) 
+Issue Date 	Text Field 	String 	This column will be populated with the date that the invoice was issued. 
+Items 	Text Field 	String 	This column will be populated with the line items of the invoice. 
+Amount 	Text Field 	String 	This column will be populated with the amount for the line item. 
+Quantity 	Text Field 	String 	This column will be populated with the quantity of the item that was purchased. 
+Sub-Total 	Text Field 	String 	This column will be populated with the total for the item. 
+Vat @ 20%	Text Field 	String 	This column will be populated with the vat amount that was calculated on the item. 
+Total 	Text Field 	String 	This column will be populated with the total including vat for the items. 
+Status	Text Field 	String 	This column will show the status of the invoice.
+Status Date	Text Field	String	This column will show the date that the status was allocated to the invoice. 
+Action 	Buttons		This column will contain buttons for the application administrator to view details of the invoice and download a pdf of the invoice. 
+Once the view button is clicked, the row will be expanded to show the payments and refunds that have been captured against that invoice.   
+Once the download button is clicked, the application will generate a pdf file and download it to the device of the application administrator. 
+
+Once the application administrator clicks on the button to view the invoice, the application will expand the table to show the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Type	Text Field 	String 	This column will be populated with the type of transaction. (Payment, Refund).
+Date	Text Field 	String 	This column will contain the date that the transaction was recorded.
+Method	Text Field 	String 	This column will contain the payment method for the transaction. If the method was automated from Xero, this column should be populated with “Unknown from Zero”. 
+Amount 	Text Field 	String 	This column will contain the amount of the transaction. 
+Comments	Text Field 	String 	This column will contain any comments that was captured against this transaction. 
+
+The window for issuing a credit note against the invoice will consist of the following fields:
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Invoice Number	Drop Down	Invoices	Yes	This field should be populated with the invoices that have been generated for the organisation that have not been paid. 
+The application administrator will use this field to select the invoice they are capturing a credit note against. 
+	Comments	Text Field 	-	String 	Yes	The application admin will use this field to capture a comment against the credit note. 
+	Cancel	Button	-			This button will be used to cancel the credit note capture. Once clicked, the user will be navigated back to the organisation account page. 
+	Confirm	Button	-			This button will be used to confirm the credit note capture. Once clicked, the credit note details will be saved against the invoice with the current date as the credit note date. 
+ 	
+When the application administrator clicks on the edit account button, they will be presented with a window to edit the account details. The window will consist of the following fields: 
+Field Number 	Field Name	Field Type	Field Data Type	Required?	Field Rules
+	Seo Name	Textfield	String	N/A	This field will be populated with the shortname of the organisation. This field will not be editable. 
+	Name	Textfield	String	N/A	This field will be populated with the name of the organisation. This field will not be editable.
+	Renew	Checkbox		No	This field will be used by the application administrator to indicate if the organisation will renew or not. By default, this box will be checked. 
+	Block Admin	Checkbox		No	This field will be used by the application administrator to indicate if the organisation administrators should be blocked. By default, this box will be checked.
+	Comments	Textfield	String	No	This field will be used by the application administrator to capture comments against the organisation account. 
+	Cancel	Button			This field will be used by the application admin to cancel. Once clicked, any changes will be discarded, and the application admin will be navigated back to the organisation account page. 
+	Save	Button			This field will be used by the application admin to Save. Once clicked, the comments captured should be saved against the organisation account and if the renew checkbox is unchecked, the organisation should change to a non-renewing organisation. If the block admin checkbox is checked, the organisation administrators should be prevented from accessing the organisation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scheduled Jobs
+The administrator will be navigated to the scheduled jobs page when clicking on the link in the navigation menu on the home page. 
+The scheduled jobs table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Job ID 	Text Field 	String 	This column will contain the ID of the job.  
+Job Name 	Text Field 	String 	This column will be populated with the name of the job. 
+Job Status	Text Field 	String	This will be populated with the status of the job. [Active, Paused, Finished, Finished with Error, Scheduled]
+Repeated	Text Field 	String	This will be populated with “Yes” if the job is scheduled to run repeatedly and “No” if it is not scheduled to run repeatedly. 
+Schduled	Text Field	String	This will be an indicator of schedule that the job is set to run on in the form of a chron expression. 
+Actions 	Buttons		This column will contain buttons to Run the job pause the job if it is currently Active, Pause the job if it is currently running and remove the job completely. 
+
+The scheduled jobs required on Membi will be the same as those on the current WebCollect, except for the following:
+-	Update Google Rankings
+-	Shift Template Events
+-	Article Popularity 
+-	Clean Orphan Data 
+
+Audit Logs
+The application administrator will be navigated to the audit logs page when they click on the audit logs link in the side menu on the application administrator home page. 
+The audit logs page will consist of a table detailing the sessions. The columns of the table should be sortable and be searchable to allow the application administrator to locate a specific log.  The table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+IP Address 	Text Field 	String 	This column will contain the IP Address of the user for the session log. 
+Sample Time	Text Field 	String 	This column will contain the date and time of the start of the session log. 
+Has non-public pages	Text Field 	String 	This column will contain a “Yes” if the log contains non-public pages and a “No” if it doesn’t.  
+Page Count 	Text Field 	String 	This column will contain a number that indicates the number of pages in the session log.  
+Actions 	Button		This column will contain a button to view the session log. Once clicked, the application admin should be navigated to a page where they can view the session log. 
+
+The application administrator will be directed to the session log page once they click on the view button on the audit logs page. The session log page will consist of page heading, a summary table and a table showing the logs for the session. 
+The page heading will consist of the text: “Last Login Session for:” and the user name and email address, and the date and time of the logs. 
+The summary table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Page Count 	Text Field 	String 	This column will contain the number of pages in the session log. 
+Duration 	Text Field 	String 	This column will contain the duration of the session in the format HH:MM:SS. 
+IP Address 	Text Field 	String 	This column will contain the IP Address of the user for the session log. 
+Host 	Text Field 	String 	This column will contain the Host Address of the user for the session log.
+Location 	Text Field 	String 	This column will contain Location of the user for the session log, based on their IP Address.
+Initial Referrer	Text Field 	String 	This column will contain the page the session started on. 
+Initial User Agent 	Text Field 	String 	This column will contain details of the browser the user used for the session. 
+
+The session logs table will consist of the following columns: 
+Column Name	Column Type	Column Data Type	Column Rules
+Time 	Text Field 	String 	This column will contain the time that of the user action. 
+Method	Text Field 	String 	This column will contain the method of the user action (GET, POST) 
+Page	Text Field 	String 	This column will contain page structure of the page where the user action took place. 
+Code	Text Field 	String 	This column will contain the HTTP code for the user action. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Integrations
+The integrations listed below are required to provide functionality to the features above as well as 
+Payments (Out of Scope) 
+o	GoCardless – Direct Debits, Subscription Payments, Instalments 
+o	Paypal – Online Payments
+o	Opayo – Card Payments  
+o	Stripe - Apple Pay, Google Pay, Direct Debits,  Direct Debits, Subscription Payments, Instalments
+Organisation API (Out of Scope)
+o	APIs exposed to orgs to allow:
+	Member Check 
+	Event information 
+	Order Checks 
+	Pulling member lists
+Accounting (Out of Scope) 
+o	Xero 
+Access Control (Out of Scope)
+o	Key Fob / Door access
+Communication (Out of scope)
+o	Mail Chimp 
+Other
+o	Membership Cards (Out of Scope)
+o	Twitter / X
+

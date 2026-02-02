@@ -1,0 +1,159 @@
+{
+  "domain": "Products",
+  "namespace": "App\\Domains\\Products",
+
+  "entities": {
+    "Product": {
+      "table": "products",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "create", "update", "delete"],
+      "fillable": ["organisation_id", "lookup_id", "name", "code", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "lookup_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "code": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" },
+          "lookup": { "entity": "Lookup", "domain": "Shared", "fk": "lookup_id", "ref": "id" }
+        },
+        "hasMany": {
+          "options": { "entity": "ProductOption", "domain": "Products", "fk": "product_id", "ref": "id" },
+          "images": { "entity": "ProductImage", "domain": "Products", "fk": "product_id", "ref": "id" },
+          "eventRules": { "entity": "ProductEventRule", "domain": "Products", "fk": "product_id", "ref": "id" },
+          "recurringRules": { "entity": "ProductRecurringRule", "domain": "Products", "fk": "product_id", "ref": "id" }
+        }
+      },
+
+      "requests": {
+        "store": {
+          "class": "StoreProductRequest",
+          "rules": {
+            "lookup_id": ["required", "exists:lookups,id"],
+            "name": ["required", "string", "max:255"],
+            "code": ["required", "string", "max:255"],
+            "description": ["nullable", "string"]
+          }
+        }
+      }
+    },
+
+    "ProductCategory": {
+      "table": "product_categories",
+      "timestamps": true,
+      "fillable": ["name", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true }
+      }
+    },
+
+    "ProductOption": {
+      "table": "product_options",
+      "timestamps": true,
+      "fillable": ["product_id", "name", "type", "is_required"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "product_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "type": { "type": "string", "length": 50 },
+        "is_required": { "type": "boolean", "default": false }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "product": { "entity": "Product", "domain": "Products", "fk": "product_id", "ref": "id" }
+        },
+        "hasMany": {
+          "variants": { "entity": "ProductOptionVariant", "domain": "Products", "fk": "product_option_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ProductOptionVariant": {
+      "table": "product_option_variants",
+      "timestamps": true,
+      "fillable": ["product_option_id", "name", "price_modifier"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "product_option_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "price_modifier": { "type": "decimal", "precision": 14, "scale": 6, "default": 0 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "productOption": { "entity": "ProductOption", "domain": "Products", "fk": "product_option_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ProductImage": {
+      "table": "product_images",
+      "timestamps": true,
+      "fillable": ["product_id", "path", "is_primary"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "product_id": { "type": "unsignedBigInteger", "index": true },
+        "path": { "type": "string", "length": 255 },
+        "is_primary": { "type": "boolean", "default": false }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "product": { "entity": "Product", "domain": "Products", "fk": "product_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ProductEventRule": {
+      "table": "product_event_rules",
+      "timestamps": true,
+      "fillable": ["product_id", "event_name", "action"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "product_id": { "type": "unsignedBigInteger", "index": true },
+        "event_name": { "type": "string", "length": 255 },
+        "action": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "product": { "entity": "Product", "domain": "Products", "fk": "product_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ProductRecurringRule": {
+      "table": "product_recurring_rules",
+      "timestamps": false,
+      "fillable": ["product_id", "interval", "frequency"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "product_id": { "type": "unsignedBigInteger", "index": true },
+        "interval": { "type": "string", "length": 50 },
+        "frequency": { "type": "integer" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "product": { "entity": "Product", "domain": "Products", "fk": "product_id", "ref": "id" }
+        }
+      }
+    }
+  }
+}

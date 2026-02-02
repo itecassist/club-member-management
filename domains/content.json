@@ -1,0 +1,214 @@
+{
+  "domain": "Content",
+  "namespace": "App\\Domains\\Content",
+  "description": "Content management including articles, FAQs, and documents",
+
+  "entities": {
+    "Article": {
+      "table": "articles",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "create", "update", "delete"],
+      "fillable": ["type", "title", "article_category_id", "page_title", "seo_name", "content", "summary", "seo_description", "featured", "live", "category_live", "popularity"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "type": { "type": "integer" },
+        "title": { "type": "string", "length": 255 },
+        "article_category_id": { "type": "unsignedBigInteger", "index": true },
+        "page_title": { "type": "string", "length": 255 },
+        "seo_name": { "type": "string", "length": 255, "unique": true },
+        "content": { "type": "text" },
+        "summary": { "type": "text" },
+        "seo_description": { "type": "string", "length": 255 },
+        "featured": { "type": "boolean" },
+        "live": { "type": "boolean", "default": true },
+        "category_live": { "type": "boolean" },
+        "popularity": { "type": "integer" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "category": { "entity": "ArticleCategory", "domain": "Content", "fk": "article_category_id", "ref": "id" }
+        },
+        "hasMany": {
+          "tags": { "entity": "ArticleTag", "domain": "Content", "fk": "article_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ArticleCategory": {
+      "table": "article_categories",
+      "timestamps": true,
+      "fillable": ["name", "seo_name", "description", "live", "article_live", "section_id", "tree_left", "tree_right", "tree_level"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "name": { "type": "string", "length": 255 },
+        "seo_name": { "type": "string", "length": 255, "unique": true },
+        "description": { "type": "text" },
+        "live": { "type": "boolean", "default": true },
+        "article_live": { "type": "boolean", "default": true },
+        "section_id": { "type": "integer" },
+        "tree_left": { "type": "integer" },
+        "tree_right": { "type": "integer" },
+        "tree_level": { "type": "integer" }
+      },
+
+      "relations": {
+        "hasMany": {
+          "articles": { "entity": "Article", "domain": "Content", "fk": "article_category_id", "ref": "id" }
+        }
+      }
+    },
+
+    "ArticleTag": {
+      "table": "article_tags",
+      "timestamps": true,
+      "fillable": ["article_id", "tag"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "article_id": { "type": "unsignedBigInteger", "index": true },
+        "tag": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "article": { "entity": "Article", "domain": "Content", "fk": "article_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Faq": {
+      "table": "faqs",
+      "timestamps": true,
+      "aggregate_root": true,
+      "fillable": ["question", "answer", "faq_category_id", "live", "popularity"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "question": { "type": "string", "length": 255 },
+        "answer": { "type": "text" },
+        "faq_category_id": { "type": "unsignedBigInteger", "index": true },
+        "live": { "type": "boolean", "default": true },
+        "popularity": { "type": "integer" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "category": { "entity": "FaqCategory", "domain": "Content", "fk": "faq_category_id", "ref": "id" }
+        },
+        "hasMany": {
+          "tags": { "entity": "FaqTag", "domain": "Content", "fk": "faq_id", "ref": "id" }
+        }
+      }
+    },
+
+    "FaqCategory": {
+      "table": "faq_categories",
+      "timestamps": true,
+      "fillable": ["name", "description", "live"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true },
+        "live": { "type": "boolean", "default": true }
+      },
+
+      "relations": {
+        "hasMany": {
+          "faqs": { "entity": "Faq", "domain": "Content", "fk": "faq_category_id", "ref": "id" }
+        }
+      }
+    },
+
+    "FaqTag": {
+      "table": "faq_tags",
+      "timestamps": true,
+      "fillable": ["faq_id", "tag"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "faq_id": { "type": "unsignedBigInteger", "index": true },
+        "tag": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "faq": { "entity": "Faq", "domain": "Content", "fk": "faq_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Document": {
+      "table": "documents",
+      "timestamps": true,
+      "polymorphic": true,
+      "fillable": ["documentable_type", "documentable_id", "name", "path", "type", "size"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "documentable_type": { "type": "string", "length": 255 },
+        "documentable_id": { "type": "unsignedBigInteger" },
+        "name": { "type": "string", "length": 255 },
+        "path": { "type": "string", "length": 255 },
+        "type": { "type": "string", "length": 100 },
+        "size": { "type": "integer" }
+      },
+
+      "indexes": [
+        { "columns": ["documentable_type", "documentable_id"], "type": "index" }
+      ],
+
+      "relations": {
+        "morphTo": {
+          "documentable": {}
+        }
+      }
+    },
+
+    "Email": {
+      "table": "emails",
+      "timestamps": true,
+      "fillable": ["organisation_id", "to", "subject", "body", "status", "sent_at"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "to": { "type": "string", "length": 255 },
+        "subject": { "type": "string", "length": 255 },
+        "body": { "type": "text" },
+        "status": { "type": "enum", "values": ["pending", "sent", "failed"] },
+        "sent_at": { "type": "datetime", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    },
+
+    "EmailTemplate": {
+      "table": "email_templates",
+      "timestamps": true,
+      "fillable": ["organisation_id", "name", "subject", "body"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "subject": { "type": "string", "length": 255 },
+        "body": { "type": "text" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        }
+      }
+    }
+  }
+}

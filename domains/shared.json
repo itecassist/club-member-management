@@ -1,0 +1,65 @@
+{
+  "domain": "Shared",
+  "namespace": "App\\Domains\\Shared",
+  "description": "Shared entities used across multiple domains",
+
+  "entities": {
+    "Country": {
+      "table": "countries",
+      "timestamps": true,
+      "aggregate_root": true,
+      "fillable": ["name", "iso_code_2", "iso_code_3", "currency_code", "currency_symbol", "symbol_left", "decimal_place", "decimal_point", "thousands_point"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "name": { "type": "string", "length": 255 },
+        "iso_code_2": { "type": "char", "length": 2 },
+        "iso_code_3": { "type": "char", "length": 3 },
+        "currency_code": { "type": "char", "length": 3 },
+        "currency_symbol": { "type": "char", "length": 1 },
+        "symbol_left": { "type": "boolean", "default": true },
+        "decimal_place": { "type": "char", "length": 1, "default": "2" },
+        "decimal_point": { "type": "char", "length": 1, "default": "." },
+        "thousands_point": { "type": "char", "length": 1, "default": "," }
+      },
+
+      "relations": {
+        "hasMany": {
+          "zones": { "entity": "Zone", "domain": "Shared", "fk": "country_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Zone": {
+      "table": "zones",
+      "timestamps": true,
+      "fillable": ["country_id", "name", "code"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "country_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "code": { "type": "string", "length": 32 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "country": { "entity": "Country", "domain": "Shared", "fk": "country_id", "ref": "id" }
+        }
+      }
+    },
+
+    "Lookup": {
+      "table": "lookups",
+      "timestamps": true,
+      "fillable": ["type", "key", "value"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "type": { "type": "string", "length": 255 },
+        "key": { "type": "string", "length": 255 },
+        "value": { "type": "string", "length": 255 }
+      }
+    }
+  }
+}

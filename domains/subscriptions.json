@@ -1,0 +1,141 @@
+{
+  "domain": "Subscriptions",
+  "namespace": "App\\Domains\\Subscriptions",
+
+  "entities": {
+    "Subscription": {
+      "table": "subscriptions",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "create", "update", "delete"],
+      "fillable": ["organisation_id", "name", "description", "virtual_form_id", "document_id", "membership", "membership_type", "period", "renewals", "published"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "string", "length": 255 },
+        "virtual_form_id": { "type": "unsignedBigInteger", "nullable": true },
+        "document_id": { "type": "unsignedBigInteger", "nullable": true },
+        "membership": { "type": "enum", "values": ["basic", "other"] },
+        "membership_type": { "type": "enum", "values": ["individual", "group"] },
+        "period": { "type": "enum", "values": ["daily", "weekly", "monthly", "yearly", "lifetime", "no_period", "installments"], "default": "yearly" },
+        "renewals": { "type": "enum", "values": ["fixed_end_date", "individual_anniversary", "not_renewable"], "default": "fixed_end_date" },
+        "published": { "type": "enum", "values": ["published", "renewal_only", "unpublished"], "default": "published" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        },
+        "hasOne": {
+          "autoRenewal": { "entity": "SubscriptionAutoRenewal", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        },
+        "hasMany": {
+          "priceOptions": { "entity": "SubscriptionPriceOption", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" },
+          "priceRenewals": { "entity": "SubscriptionPriceRenewal", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" },
+          "priceLateFees": { "entity": "SubscriptionPriceLateFee", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        }
+      },
+
+      "requests": {
+        "store": {
+          "class": "StoreSubscriptionRequest",
+          "rules": {
+            "name": ["required", "string", "max:255"],
+            "description": ["required", "string", "max:255"],
+            "membership": ["required", "in:basic,other"],
+            "membership_type": ["required", "in:individual,group"],
+            "period": ["in:daily,weekly,monthly,yearly,lifetime,no_period,installments"],
+            "renewals": ["in:fixed_end_date,individual_anniversary,not_renewable"],
+            "published": ["in:published,renewal_only,unpublished"]
+          }
+        }
+      }
+    },
+
+    "SubscriptionAutoRenewal": {
+      "table": "subscription_auto_renewals",
+      "timestamps": true,
+      "fillable": ["subscription_id", "enable_auto_renewal", "apply_to_all_subscription_fees", "payment_method", "order_expiry_days", "should_have_form", "virtual_form_id", "message"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "subscription_id": { "type": "unsignedBigInteger", "index": true },
+        "enable_auto_renewal": { "type": "boolean", "default": false },
+        "apply_to_all_subscription_fees": { "type": "boolean" },
+        "payment_method": { "type": "boolean" },
+        "order_expiry_days": { "type": "integer" },
+        "should_have_form": { "type": "enum", "values": ["no", "select_existing", "create_new"], "default": "no" },
+        "virtual_form_id": { "type": "unsignedBigInteger", "nullable": true },
+        "message": { "type": "string", "length": 255 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "subscription": { "entity": "Subscription", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        }
+      }
+    },
+
+    "SubscriptionPriceOption": {
+      "table": "subscription_price_options",
+      "timestamps": true,
+      "fillable": ["subscription_id", "name", "price", "tax_rate_id"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "subscription_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "price": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_rate_id": { "type": "unsignedBigInteger", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "subscription": { "entity": "Subscription", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        }
+      }
+    },
+
+    "SubscriptionPriceRenewal": {
+      "table": "subscription_price_renewals",
+      "timestamps": true,
+      "fillable": ["subscription_id", "name", "price", "tax_rate_id"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "subscription_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "price": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_rate_id": { "type": "unsignedBigInteger", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "subscription": { "entity": "Subscription", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        }
+      }
+    },
+
+    "SubscriptionPriceLateFee": {
+      "table": "subscription_price_late_fees",
+      "timestamps": true,
+      "fillable": ["subscription_id", "days_after_due", "fee_amount", "tax_rate_id"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "subscription_id": { "type": "unsignedBigInteger", "index": true },
+        "days_after_due": { "type": "integer" },
+        "fee_amount": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_rate_id": { "type": "unsignedBigInteger", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "subscription": { "entity": "Subscription", "domain": "Subscriptions", "fk": "subscription_id", "ref": "id" }
+        }
+      }
+    }
+  }
+}

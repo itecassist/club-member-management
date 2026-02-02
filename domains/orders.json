@@ -1,0 +1,85 @@
+{
+  "domain": "Orders",
+  "namespace": "App\\Domains\\Orders",
+
+  "entities": {
+    "Order": {
+      "table": "orders",
+      "timestamps": true,
+      "aggregate_root": true,
+      "policies": ["view", "update", "delete"],
+      "fillable": ["member_id", "organisation_id", "name", "email", "payment_method", "payment_reference", "order_status", "date_finished", "comments", "currency_code", "currency_value", "tax_total", "total"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "member_id": { "type": "unsignedBigInteger", "nullable": true, "index": true },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "email": { "type": "string", "length": 255 },
+        "payment_method": { "type": "string", "length": 255 },
+        "payment_reference": { "type": "string", "length": 255, "nullable": true },
+        "order_status": { 
+          "type": "enum", 
+          "values": ["order_placed", "payment_received", "payment_problem", "cancelled", "cancelled_before_payment", "cancelled_pending_payment", "cancelled_refund_scheduled", "cancelled_refund_due", "cancelled_not_refunded", "cancelled_refunded", "partially_cancelled", "no_payment_required", "completed", "partial_payment", "refunded", "payment_transfer"]
+        },
+        "date_finished": { "type": "date" },
+        "comments": { "type": "string", "length": 255, "nullable": true },
+        "currency_code": { "type": "char", "length": 3 },
+        "currency_value": { "type": "decimal", "precision": 14, "scale": 6, "nullable": true },
+        "tax_total": { "type": "decimal", "precision": 14, "scale": 6 },
+        "total": { "type": "decimal", "precision": 14, "scale": 6 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "member": { "entity": "Member", "domain": "Members", "fk": "member_id", "ref": "id" },
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        },
+        "hasMany": {
+          "items": { "entity": "OrderItem", "domain": "Orders", "fk": "order_id", "ref": "id" }
+        }
+      },
+
+      "requests": {
+        "store": {
+          "class": "StoreOrderRequest",
+          "rules": {
+            "member_id": ["nullable", "exists:members,id"],
+            "name": ["required", "string", "max:255"],
+            "email": ["required", "email", "max:255"],
+            "payment_method": ["required", "string", "max:255"],
+            "order_status": ["required", "string"],
+            "date_finished": ["required", "date"],
+            "currency_code": ["required", "string", "size:3"],
+            "tax_total": ["required", "numeric"],
+            "total": ["required", "numeric"]
+          }
+        }
+      }
+    },
+
+    "OrderItem": {
+      "table": "order_items",
+      "timestamps": true,
+      "fillable": ["order_id", "product_id", "name", "quantity", "price", "tax_rate", "tax_amount", "total"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "order_id": { "type": "unsignedBigInteger", "index": true },
+        "product_id": { "type": "unsignedBigInteger", "nullable": true },
+        "name": { "type": "string", "length": 255 },
+        "quantity": { "type": "integer" },
+        "price": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_rate": { "type": "decimal", "precision": 14, "scale": 6 },
+        "tax_amount": { "type": "decimal", "precision": 14, "scale": 6 },
+        "total": { "type": "decimal", "precision": 14, "scale": 6 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "order": { "entity": "Order", "domain": "Orders", "fk": "order_id", "ref": "id" }
+        }
+      }
+    }
+  }
+}

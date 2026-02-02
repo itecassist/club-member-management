@@ -1,0 +1,165 @@
+{
+  "domain": "Members",
+  "namespace": "App\\Domains\\Members",
+
+  "entities": {
+    "Member": {
+      "table": "members",
+      "aggregate_root": true,
+      "policies": ["view", "update", "delete"],
+      "timestamps": true,
+      "fillable": ["user_id", "organisation_id", "title", "first_name", "last_name", "email", "mobile_phone", "date_of_birth", "gender", "member_number", "joined_at", "is_active", "roles", "last_login_at"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "user_id": { "type": "unsignedBigInteger", "index": true },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "title": { "type": "string", "length": 50, "nullable": true },
+        "first_name": { "type": "string", "length": 50 },
+        "last_name": { "type": "string", "length": 50 },
+        "email": { "type": "string", "length": 255 },
+        "mobile_phone": { "type": "string", "length": 30 },
+        "date_of_birth": { "type": "date", "nullable": true },
+        "gender": { "type": "enum", "values": ["female", "male", "other"] },
+        "member_number": { "type": "string", "length": 30, "nullable": true },
+        "joined_at": { "type": "date" },
+        "is_active": { "type": "boolean", "default": true },
+        "roles": { "type": "json" },
+        "last_login_at": { "type": "datetime" }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": {
+            "entity": "Organisation",
+            "domain": "Tenancy",
+            "fk": "organisation_id",
+            "ref": "id"
+          },
+          "user": {
+            "entity": "User",
+            "domain": "Auth",
+            "fk": "user_id",
+            "ref": "id"
+          }
+        },
+        "morphMany": {
+          "addresses": {
+            "entity": "Address",
+            "domain": "Members",
+            "morph": "addressable"
+          },
+          "contacts": {
+            "entity": "Contact",
+            "domain": "Members",
+            "morph": "contactable"
+          }
+        }
+      },
+
+      "requests": {
+        "store": {
+          "class": "StoreMemberRequest",
+          "rules": {
+            "user_id": ["required", "exists:users,id"],
+            "title": ["nullable", "string", "max:50"],
+            "first_name": ["required", "string", "max:50"],
+            "last_name": ["required", "string", "max:50"],
+            "email": ["required", "email", "max:255"],
+            "mobile_phone": ["required", "string", "max:30"],
+            "date_of_birth": ["nullable", "date"],
+            "gender": ["required", "in:female,male,other"],
+            "member_number": ["nullable", "string", "max:30"],
+            "joined_at": ["required", "date"],
+            "is_active": ["boolean"]
+          }
+        },
+        "update": {
+          "class": "UpdateMemberRequest",
+          "rules": {
+            "title": ["nullable", "string", "max:50"],
+            "first_name": ["string", "max:50"],
+            "last_name": ["string", "max:50"],
+            "email": ["email", "max:255"],
+            "mobile_phone": ["string", "max:30"],
+            "date_of_birth": ["nullable", "date"],
+            "gender": ["in:female,male,other"],
+            "member_number": ["nullable", "string", "max:30"],
+            "is_active": ["boolean"]
+          }
+        }
+      }
+    },
+
+    "Address": {
+      "table": "addresses",
+      "polymorphic": true,
+      "timestamps": true,
+      "fillable": ["addressable_type", "addressable_id", "line_1", "line_2", "line_3", "line_4", "postcode", "country_id", "zone_id"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "addressable_type": { "type": "string", "length": 255 },
+        "addressable_id": { "type": "unsignedBigInteger" },
+        "line_1": { "type": "string", "length": 64 },
+        "line_2": { "type": "string", "length": 64, "nullable": true },
+        "line_3": { "type": "string", "length": 64, "nullable": true },
+        "line_4": { "type": "string", "length": 64, "nullable": true },
+        "postcode": { "type": "string", "length": 20 },
+        "country_id": { "type": "unsignedBigInteger", "index": true },
+        "zone_id": { "type": "unsignedBigInteger", "index": true }
+      },
+
+      "indexes": [
+        { "columns": ["addressable_type", "addressable_id"], "type": "index" }
+      ],
+
+      "relations": {
+        "morphTo": {
+          "addressable": {}
+        },
+        "belongsTo": {
+          "country": {
+            "entity": "Country",
+            "domain": "Shared",
+            "fk": "country_id",
+            "ref": "id"
+          },
+          "zone": {
+            "entity": "Zone",
+            "domain": "Shared",
+            "fk": "zone_id",
+            "ref": "id"
+          }
+        }
+      }
+    },
+
+    "Contact": {
+      "table": "contacts",
+      "polymorphic": true,
+      "timestamps": true,
+      "fillable": ["contactable_type", "contactable_id", "name", "email", "mobile_phone", "relation"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "contactable_type": { "type": "string", "length": 255 },
+        "contactable_id": { "type": "unsignedBigInteger" },
+        "name": { "type": "string", "length": 255 },
+        "email": { "type": "string", "length": 255, "nullable": true },
+        "mobile_phone": { "type": "string", "length": 255, "nullable": true },
+        "relation": { "type": "string", "length": 255, "nullable": true }
+      },
+
+      "indexes": [
+        { "columns": ["contactable_type", "contactable_id"], "type": "index" }
+      ],
+
+      "relations": {
+        "morphTo": {
+          "contactable": {}
+        }
+      }
+    }
+  }
+}

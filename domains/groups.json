@@ -1,0 +1,175 @@
+{
+  "domain": "Groups",
+  "entities": {
+    "Group": {
+      "aggregate_root": true,
+      "table": "groups",
+      "fields": {
+        "id": {
+          "type": "bigIncrements"
+        },
+        "organisation_id": {
+          "type": "unsignedBigInteger",
+          "index": true
+        },
+        "name": {
+          "type": "string",
+          "length": 255
+        },
+        "type": {
+          "type": "enum",
+          "values": ["family", "corporate", "club", "committee", "other"],
+          "default": "other"
+        },
+        "description": {
+          "type": "text",
+          "nullable": true
+        },
+        "primary_admin_id": {
+          "type": "unsignedBigInteger",
+          "nullable": true,
+          "comment": "Primary administrator member ID"
+        },
+        "max_members": {
+          "type": "unsignedInteger",
+          "nullable": true,
+          "comment": "Maximum number of members allowed in group"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true
+        },
+        "created_at": {
+          "type": "timestamp",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "timestamp",
+          "nullable": true
+        }
+      },
+      "relations": {
+        "organisation": {
+          "type": "belongsTo",
+          "entity": "Organisation",
+          "domain": "Tenancy",
+          "foreign_key": "organisation_id"
+        },
+        "primaryAdmin": {
+          "type": "belongsTo",
+          "entity": "Member",
+          "domain": "Members",
+          "foreign_key": "primary_admin_id"
+        },
+        "members": {
+          "type": "hasMany",
+          "entity": "GroupMember",
+          "domain": "Groups",
+          "foreign_key": "group_id"
+        },
+        "addresses": {
+          "type": "morphMany",
+          "entity": "Address",
+          "domain": "Members",
+          "morph_name": "addressable"
+        }
+      },
+      "fillable": [
+        "organisation_id",
+        "name",
+        "type",
+        "description",
+        "primary_admin_id",
+        "max_members",
+        "is_active"
+      ],
+      "validation": {
+        "name": "required|string|max:255",
+        "type": "required|in:family,corporate,club,committee,other",
+        "description": "nullable|string",
+        "primary_admin_id": "nullable|exists:members,id",
+        "max_members": "nullable|integer|min:1",
+        "is_active": "boolean"
+      }
+    },
+    "GroupMember": {
+      "aggregate_root": false,
+      "table": "group_members",
+      "fields": {
+        "id": {
+          "type": "bigIncrements"
+        },
+        "group_id": {
+          "type": "unsignedBigInteger",
+          "index": true
+        },
+        "member_id": {
+          "type": "unsignedBigInteger",
+          "index": true
+        },
+        "role": {
+          "type": "enum",
+          "values": ["admin", "member"],
+          "default": "member"
+        },
+        "is_primary": {
+          "type": "boolean",
+          "default": false,
+          "comment": "Is this the primary contact for the group"
+        },
+        "joined_at": {
+          "type": "date",
+          "nullable": true
+        },
+        "left_at": {
+          "type": "date",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "timestamp",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "timestamp",
+          "nullable": true
+        }
+      },
+      "relations": {
+        "group": {
+          "type": "belongsTo",
+          "entity": "Group",
+          "domain": "Groups",
+          "foreign_key": "group_id"
+        },
+        "member": {
+          "type": "belongsTo",
+          "entity": "Member",
+          "domain": "Members",
+          "foreign_key": "member_id"
+        }
+      },
+      "indexes": [
+        {
+          "columns": ["group_id", "member_id"],
+          "unique": true
+        }
+      ],
+      "fillable": [
+        "group_id",
+        "member_id",
+        "role",
+        "is_primary",
+        "joined_at",
+        "left_at"
+      ],
+      "validation": {
+        "group_id": "required|exists:groups,id",
+        "member_id": "required|exists:members,id",
+        "role": "required|in:admin,member",
+        "is_primary": "boolean",
+        "joined_at": "nullable|date",
+        "left_at": "nullable|date|after:joined_at"
+      }
+    }
+  }
+}

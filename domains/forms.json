@@ -1,0 +1,81 @@
+{
+  "domain": "Forms",
+  "namespace": "App\\Domains\\Forms",
+  "description": "Dynamic virtual forms and fields",
+
+  "entities": {
+    "VirtualForm": {
+      "table": "virtual_forms",
+      "timestamps": true,
+      "aggregate_root": true,
+      "fillable": ["organisation_id", "name", "description"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "organisation_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "description": { "type": "text", "nullable": true }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "organisation": { "entity": "Organisation", "domain": "Tenancy", "fk": "organisation_id", "ref": "id" }
+        },
+        "hasMany": {
+          "fields": { "entity": "VirtualField", "domain": "Forms", "fk": "virtual_form_id", "ref": "id" },
+          "records": { "entity": "VirtualRecord", "domain": "Forms", "fk": "virtual_form_id", "ref": "id" }
+        }
+      }
+    },
+
+    "VirtualField": {
+      "table": "virtual_fields",
+      "timestamps": true,
+      "fillable": ["virtual_form_id", "name", "label", "type", "required", "options", "order"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "virtual_form_id": { "type": "unsignedBigInteger", "index": true },
+        "name": { "type": "string", "length": 255 },
+        "label": { "type": "string", "length": 255 },
+        "type": { "type": "string", "length": 100 },
+        "required": { "type": "boolean", "default": false },
+        "options": { "type": "json", "nullable": true },
+        "order": { "type": "integer", "default": 0 }
+      },
+
+      "relations": {
+        "belongsTo": {
+          "virtualForm": { "entity": "VirtualForm", "domain": "Forms", "fk": "virtual_form_id", "ref": "id" }
+        }
+      }
+    },
+
+    "VirtualRecord": {
+      "table": "virtual_records",
+      "timestamps": true,
+      "fillable": ["virtual_form_id", "recordable_type", "recordable_id", "data"],
+
+      "fields": {
+        "id": { "type": "bigIncrements" },
+        "virtual_form_id": { "type": "unsignedBigInteger", "index": true },
+        "recordable_type": { "type": "string", "length": 255 },
+        "recordable_id": { "type": "unsignedBigInteger" },
+        "data": { "type": "json" }
+      },
+
+      "indexes": [
+        { "columns": ["recordable_type", "recordable_id"], "type": "index" }
+      ],
+
+      "relations": {
+        "belongsTo": {
+          "virtualForm": { "entity": "VirtualForm", "domain": "Forms", "fk": "virtual_form_id", "ref": "id" }
+        },
+        "morphTo": {
+          "recordable": {}
+        }
+      }
+    }
+  }
+}
