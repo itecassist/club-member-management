@@ -17,9 +17,34 @@ Route::middleware('auth:sanctum')->group(function () {
     if (file_exists(__DIR__ . '/Auth.php')) {
         require __DIR__ . '/Auth.php';
     }
-    
+    if(file_exists(__DIR__ . '/Content.php')) {
+        require __DIR__ . '/Content.php';
+    }
+    if (file_exists(__DIR__ . '/Financial.php')) {
+        require __DIR__ . '/Financial.php';
+    }
+    if (file_exists(__DIR__ . '/Form.php')) {
+        require __DIR__ . '/Form.php';
+    }
+    if (file_exists(__DIR__ . '/Groups.php')) {
+        require __DIR__ . '/Groups.php';
+    }
+
     if (file_exists(__DIR__ . '/Members.php')) {
         require __DIR__ . '/Members.php';
+    }
+
+    if (file_exists(__DIR__ . '/Orders.php')) {
+        require __DIR__ . '/Orders.php';
+    }
+    if(file_exists(__DIR__ . '/Products.php')) {
+        require __DIR__ . '/Products.php';
+    }
+    if (file_exists(__DIR__ . '/Shared.php')) {
+        require __DIR__ . '/Shared.php';
+    }
+    if (file_exists(__DIR__ . '/Subscriptions.php')) {
+        require __DIR__ . '/Subscriptions.php';
     }
     if (file_exists(__DIR__ . '/Tenancy.php')) {
         require __DIR__ . '/Tenancy.php';
