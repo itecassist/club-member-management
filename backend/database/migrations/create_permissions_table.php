@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->string('display_name', 255);
             $table->text('description')->nullable();
             $table->string('module', 100);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->index(['module', 'name']);
             $table->timestamps();
         });

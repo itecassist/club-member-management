@@ -15,7 +15,7 @@ class MakeCrudDomain extends Command
         $domain = $this->argument('domain');
         $entity = $this->argument('entity');
 
-        $path = base_path("domains/" . strtolower($domain) . ".json");
+        $path = dirname(base_path()) . "/domains/" . strtolower($domain) . ".json";
 
         if (!File::exists($path)) {
             $this->error("Domain JSON not found: {$path}");
@@ -47,7 +47,7 @@ class MakeCrudDomain extends Command
         $base = app_path("Domains/{$domain}");
         File::ensureDirectoryExists($base);
 
-        foreach (['Models', 'Actions', 'Policies', 'Events', 'Repositories'] as $dir) {
+        foreach (['Models', 'Actions', 'DTOs', 'Policies', 'Events', 'Repositories'] as $dir) {
             File::ensureDirectoryExists("{$base}/{$dir}");
         }
 
@@ -56,6 +56,7 @@ class MakeCrudDomain extends Command
         $this->generateRequests($spec, $entity);
 
         if ($this->isAggregateRoot($spec, $entity)) {
+            $this->generateDto($spec, $domain, $entity);
             $this->generateRepository($spec, $domain, $entity);
             $this->generateActions($spec, $domain, $entity);
             $this->generateEvents($spec, $domain, $entity);
@@ -345,8 +346,6 @@ PHP;
         return "->default('{$value}')";
     }
 
-
-
     /* ---------- REQUESTS ---------- */
 
     protected function generateRequests(array $spec, string $entity)
@@ -369,13 +368,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 class {$className} extends FormRequest {
-    public function authorize(): bool 
-    { 
-        return true; 
+    public function authorize(): bool
+    {
+        return true;
     }
-    
-    public function rules(): array 
-    { 
+
+    public function rules(): array
+    {
         return {$rules};
     }
 }
@@ -393,33 +392,111 @@ PHP);
         return "[\n" . implode(",\n", $lines) . "\n        ]";
     }
 
-    /* ---------- REPOSITORY ---------- */
+    /* ---------- DTO ---------- */
 
-    protected function generateRepository(array $spec, string $domain, string $entity)
+    protected function generateDto(array $spec, string $domain, string $entity)
     {
-        $ns = "App\\Domains\\{$domain}\\Repositories";
-        $model = "App\\Domains\\{$domain}\\Models\\{$entity}";
-        $file = app_path("Domains/{$domain}/Repositories/{$entity}Repository.php");
+        $ns    = "App\\Domains\\{$domain}\\DTOs";
+        $class = "{$entity}Data";
+        $file  = app_path("Domains/{$domain}/DTOs/{$class}.php");
 
         if (file_exists($file) && !$this->option('force')) return;
+
+        $fillable = $spec['entities'][$entity]['fillable'] ?? [];
+        $fields   = $spec['entities'][$entity]['fields'] ?? [];
+        $skip     = ['id', 'organisation_id', 'created_at', 'updated_at'];
+
+        $props     = [];
+        $fromArray = [];
+        $toArray   = [];
+
+        foreach ($fillable as $fieldName) {
+            if (in_array($fieldName, $skip)) continue;
+
+            $fieldSpec = $fields[$fieldName] ?? ['type' => 'string'];
+            $phpType   = $this->phpTypeFromField($fieldSpec);
+            $nullable  = !empty($fieldSpec['nullable']);
+            $typeHint  = ($nullable ? '?' : '') . $phpType;
+            $camel     = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $fieldName))));
+
+            $props[]     = "        public readonly {$typeHint} \${$camel},";
+            $fromArray[] = "            {$camel}: \$data['{$fieldName}']" . ($nullable ? " ?? null," : ",");
+            $toArray[]   = "            '{$fieldName}' => \$this->{$camel},";
+        }
+
+        $propsStr     = implode("\n", $props);
+        $fromArrayStr = implode("\n", $fromArray);
+        $toArrayStr   = implode("\n", $toArray);
 
         $stub = <<<PHP
 <?php
 
 namespace {$ns};
 
-use {$model};
+readonly class {$class}
+{
+    public function __construct(
+{$propsStr}
+    ) {}
+
+    public static function fromArray(array \$data): self
+    {
+        return new self(
+{$fromArrayStr}
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+{$toArrayStr}
+        ];
+    }
+}
+PHP;
+
+        file_put_contents($file, $stub);
+    }
+
+    protected function phpTypeFromField(array $fieldSpec): string
+    {
+        return match ($fieldSpec['type']) {
+            'bigIncrements', 'unsignedBigInteger', 'unsignedInteger', 'unsignedTinyInteger', 'integer' => 'int',
+            'boolean' => 'bool',
+            'json'    => 'array',
+            default   => 'string',
+        };
+    }
+
+    /* ---------- REPOSITORY ---------- */
+
+    protected function generateRepository(array $spec, string $domain, string $entity)
+    {
+        $ns      = "App\\Domains\\{$domain}\\Repositories";
+        $modelNs = "App\\Domains\\{$domain}\\Models\\{$entity}";
+        $dtoNs   = "App\\Domains\\{$domain}\\DTOs\\{$entity}Data";
+        $file    = app_path("Domains/{$domain}/Repositories/{$entity}Repository.php");
+
+        if (file_exists($file) && !$this->option('force')) return;
+
+        file_put_contents($file, <<<PHP
+<?php
+
+namespace {$ns};
+
+use {$modelNs};
+use {$dtoNs};
 
 class {$entity}Repository
 {
-    public function create(array \$data): {$entity}
+    public function create({$entity}Data \$data): {$entity}
     {
-        return {$entity}::create(\$data);
+        return {$entity}::create(\$data->toArray());
     }
 
-    public function update({$entity} \$model, array \$data): {$entity}
+    public function update({$entity} \$model, {$entity}Data \$data): {$entity}
     {
-        \$model->update(\$data);
+        \$model->update(\$data->toArray());
         return \$model;
     }
 
@@ -428,56 +505,135 @@ class {$entity}Repository
         return {$entity}::find(\$id);
     }
 
+    public function findOrFail(int \$id): {$entity}
+    {
+        return {$entity}::findOrFail(\$id);
+    }
+
     public function paginate(int \$perPage = 15)
     {
         return {$entity}::paginate(\$perPage);
     }
-}
-PHP;
 
-        file_put_contents($file, $stub);
+    public function delete({$entity} \$model): void
+    {
+        \$model->delete();
     }
-
+}
+PHP);
+    }
 
     /* ---------- ACTIONS ---------- */
 
     protected function generateActions(array $spec, string $domain, string $entity)
     {
-        $repo = "App\\Domains\\{$domain}\\Repositories\\{$entity}Repository";
-        $model = "App\\Domains\\{$domain}\\Models\\{$entity}";
+        $repoNs    = "App\\Domains\\{$domain}\\Repositories\\{$entity}Repository";
+        $modelNs   = "App\\Domains\\{$domain}\\Models\\{$entity}";
+        $dtoNs     = "App\\Domains\\{$domain}\\DTOs\\{$entity}Data";
+        $eventNs   = "App\\Domains\\{$domain}\\Events\\{$entity}Created";
+        $hasOrgId  = isset($spec['entities'][$entity]['fields']['organisation_id']);
 
-        foreach (['Create', 'Update'] as $type) {
-            $class = "{$type}{$entity}";
-            $file = app_path("Domains/{$domain}/Actions/{$class}.php");
+        $eventLine = $hasOrgId
+            ? "event(new {$entity}Created(\$model->id, \$model->organisation_id));"
+            : "event(new {$entity}Created(\$model->id));";
 
-            $body = $type === 'Create'
-                ? "\$model = \$this->repo->create(\$data);"
-                : "\$model = \$this->repo->update(\$model, \$data);";
-
-            file_put_contents($file, <<<PHP
+        // Create action
+        file_put_contents(app_path("Domains/{$domain}/Actions/Create{$entity}.php"), <<<PHP
 <?php
-namespace App\\Domains\\{$domain}\\Actions;
-use {$repo};
-use {$model};
 
-class {$class} {
+namespace App\\Domains\\{$domain}\\Actions;
+
+use {$repoNs};
+use {$modelNs};
+use {$dtoNs};
+use {$eventNs};
+
+class Create{$entity}
+{
     public function __construct(protected {$entity}Repository \$repo) {}
-    public function execute(array \$data, {$entity} \$model = null): {$entity} {
-        {$body}
+
+    public function execute({$entity}Data \$data): {$entity}
+    {
+        \$model = \$this->repo->create(\$data);
+        {$eventLine}
         return \$model;
     }
 }
 PHP);
-        }
+
+        // Update action
+        file_put_contents(app_path("Domains/{$domain}/Actions/Update{$entity}.php"), <<<PHP
+<?php
+
+namespace App\\Domains\\{$domain}\\Actions;
+
+use {$repoNs};
+use {$modelNs};
+use {$dtoNs};
+
+class Update{$entity}
+{
+    public function __construct(protected {$entity}Repository \$repo) {}
+
+    public function execute({$entity}Data \$data, {$entity} \$model): {$entity}
+    {
+        return \$this->repo->update(\$model, \$data);
+    }
+}
+PHP);
+
+        // Delete action
+        file_put_contents(app_path("Domains/{$domain}/Actions/Delete{$entity}.php"), <<<PHP
+<?php
+
+namespace App\\Domains\\{$domain}\\Actions;
+
+use {$repoNs};
+use {$modelNs};
+
+class Delete{$entity}
+{
+    public function __construct(protected {$entity}Repository \$repo) {}
+
+    public function execute({$entity} \$model): void
+    {
+        \$this->repo->delete(\$model);
+    }
+}
+PHP);
     }
 
     /* ---------- EVENTS ---------- */
 
     protected function generateEvents(array $spec, string $domain, string $entity)
     {
+        $hasOrgId = isset($spec['entities'][$entity]['fields']['organisation_id']);
+
+        // Always generate {Entity}Created for aggregate roots
+        $createdFile = app_path("Domains/{$domain}/Events/{$entity}Created.php");
+        if (!file_exists($createdFile) || $this->option('force')) {
+            $constructor = $hasOrgId
+                ? "public function __construct(public readonly int \$id, public readonly int \$organisationId) {}"
+                : "public function __construct(public readonly int \$id) {}";
+
+            file_put_contents($createdFile, <<<PHP
+<?php
+
+namespace App\\Domains\\{$domain}\\Events;
+
+class {$entity}Created
+{
+    {$constructor}
+}
+PHP);
+        }
+
+        // Generate any additional events from spec
         foreach ($spec['entities'][$entity]['events'] ?? [] as $e) {
             $file = app_path("Domains/{$domain}/Events/{$e['name']}.php");
-            file_put_contents($file, "<?php\nnamespace App\\Domains\\{$domain}\\Events;\nclass {$e['name']} {}\n");
+            if (!file_exists($file) || $this->option('force')) {
+                file_put_contents($file, "<?php\nnamespace App\\Domains\\{$domain}\\Events;\nclass {$e['name']} {}\n");
+            }
         }
     }
 
@@ -488,34 +644,58 @@ PHP);
         $dir = app_path("Http/Controllers/{$domain}");
         File::ensureDirectoryExists($dir);
 
-        $file = "{$dir}/{$entity}Controller.php";
-
-        file_put_contents($file, <<<PHP
+        file_put_contents("{$dir}/{$entity}Controller.php", <<<PHP
 <?php
+
 namespace App\\Http\\Controllers\\{$domain};
 
-use App\\Domains\\{$domain}\\Repositories\\{$entity}Repository;
 use App\\Domains\\{$domain}\\Actions\\Create{$entity};
+use App\\Domains\\{$domain}\\Actions\\Delete{$entity};
 use App\\Domains\\{$domain}\\Actions\\Update{$entity};
+use App\\Domains\\{$domain}\\DTOs\\{$entity}Data;
+use App\\Domains\\{$domain}\\Repositories\\{$entity}Repository;
 use App\\Http\\Requests\\Store{$entity}Request;
 use App\\Http\\Requests\\Update{$entity}Request;
+use Illuminate\\Http\\JsonResponse;
 
-class {$entity}Controller {
+class {$entity}Controller
+{
     public function __construct(
         protected {$entity}Repository \$repo,
         protected Create{$entity} \$create,
-        protected Update{$entity} \$update
+        protected Update{$entity} \$update,
+        protected Delete{$entity} \$delete,
     ) {}
-    public function index()
+
+    public function index(): JsonResponse
     {
         return response()->json(\$this->repo->paginate());
     }
-    public function store(Store{$entity}Request \$r) {
-        return \$this->create->execute(\$r->validated());
+
+    public function show(int \$id): JsonResponse
+    {
+        return response()->json(\$this->repo->findOrFail(\$id));
     }
 
-    public function update(Update{$entity}Request \$r, \$id) {
-        return \$this->update->execute(\$r->validated(), \$this->repo->find(\$id));
+    public function store(Store{$entity}Request \$r): JsonResponse
+    {
+        \$model = \$this->create->execute({$entity}Data::fromArray(\$r->validated()));
+        return response()->json(\$model, 201);
+    }
+
+    public function update(Update{$entity}Request \$r, int \$id): JsonResponse
+    {
+        \$model = \$this->update->execute(
+            {$entity}Data::fromArray(\$r->validated()),
+            \$this->repo->findOrFail(\$id)
+        );
+        return response()->json(\$model);
+    }
+
+    public function destroy(int \$id): JsonResponse
+    {
+        \$this->delete->execute(\$this->repo->findOrFail(\$id));
+        return response()->json(null, 204);
     }
 }
 PHP);
@@ -563,13 +743,16 @@ PHP);
         // Append route
         file_put_contents($file, $content . "\n{$routeLine}\n");
     }
+
+    /* ---------- POLICY ---------- */
+
     protected function generatePolicy(array $spec, string $domain, string $entity)
     {
         if (empty($spec['entities'][$entity]['policies'])) return;
 
-        $ns = "App\\Domains\\{$domain}\\Policies";
+        $ns    = "App\\Domains\\{$domain}\\Policies";
         $model = "App\\Domains\\{$domain}\\Models\\{$entity}";
-        $file = app_path("Domains/{$domain}/Policies/{$entity}Policy.php");
+        $file  = app_path("Domains/{$domain}/Policies/{$entity}Policy.php");
 
         if (file_exists($file) && !$this->option('force')) return;
 

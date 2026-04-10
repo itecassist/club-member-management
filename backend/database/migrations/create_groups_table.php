@@ -12,11 +12,13 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('organisation_id')->index();
             $table->string('name', 255);
-            $table->enum('type', ['family', 'corporate', 'club', 'committee', 'other'])->default('other');
+            $table->enum('type', ['family','corporate','club','committee','other'])->default('other');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('primary_admin_id')->nullable();
             $table->unsignedInteger('max_members')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->timestamps();
         });
     }

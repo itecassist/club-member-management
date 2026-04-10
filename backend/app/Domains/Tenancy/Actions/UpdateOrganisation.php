@@ -1,12 +1,17 @@
 <?php
+
 namespace App\Domains\Tenancy\Actions;
+
 use App\Domains\Tenancy\Repositories\OrganisationRepository;
 use App\Domains\Tenancy\Models\Organisation;
+use App\Domains\Tenancy\DTOs\OrganisationData;
 
-class UpdateOrganisation {
+class UpdateOrganisation
+{
     public function __construct(protected OrganisationRepository $repo) {}
-    public function execute(array $data, Organisation $model = null): Organisation {
-        $model = $this->repo->update($model, $data);
-        return $model;
+
+    public function execute(OrganisationData $data, Organisation $model): Organisation
+    {
+        return $this->repo->update($model, $data);
     }
 }

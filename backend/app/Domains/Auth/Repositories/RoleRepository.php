@@ -3,17 +3,18 @@
 namespace App\Domains\Auth\Repositories;
 
 use App\Domains\Auth\Models\Role;
+use App\Domains\Auth\DTOs\RoleData;
 
 class RoleRepository
 {
-    public function create(array $data): Role
+    public function create(RoleData $data): Role
     {
-        return Role::create($data);
+        return Role::create($data->toArray());
     }
 
-    public function update(Role $model, array $data): Role
+    public function update(Role $model, RoleData $data): Role
     {
-        $model->update($data);
+        $model->update($data->toArray());
         return $model;
     }
 
@@ -22,8 +23,18 @@ class RoleRepository
         return Role::find($id);
     }
 
+    public function findOrFail(int $id): Role
+    {
+        return Role::findOrFail($id);
+    }
+
     public function paginate(int $perPage = 15)
     {
         return Role::paginate($perPage);
+    }
+
+    public function delete(Role $model): void
+    {
+        $model->delete();
     }
 }

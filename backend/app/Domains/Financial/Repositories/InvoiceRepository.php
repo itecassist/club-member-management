@@ -3,17 +3,18 @@
 namespace App\Domains\Financial\Repositories;
 
 use App\Domains\Financial\Models\Invoice;
+use App\Domains\Financial\DTOs\InvoiceData;
 
 class InvoiceRepository
 {
-    public function create(array $data): Invoice
+    public function create(InvoiceData $data): Invoice
     {
-        return Invoice::create($data);
+        return Invoice::create($data->toArray());
     }
 
-    public function update(Invoice $model, array $data): Invoice
+    public function update(Invoice $model, InvoiceData $data): Invoice
     {
-        $model->update($data);
+        $model->update($data->toArray());
         return $model;
     }
 
@@ -22,8 +23,18 @@ class InvoiceRepository
         return Invoice::find($id);
     }
 
+    public function findOrFail(int $id): Invoice
+    {
+        return Invoice::findOrFail($id);
+    }
+
     public function paginate(int $perPage = 15)
     {
         return Invoice::paginate($perPage);
+    }
+
+    public function delete(Invoice $model): void
+    {
+        $model->delete();
     }
 }

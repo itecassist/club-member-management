@@ -3,17 +3,18 @@
 namespace App\Domains\Groups\Repositories;
 
 use App\Domains\Groups\Models\Group;
+use App\Domains\Groups\DTOs\GroupData;
 
 class GroupRepository
 {
-    public function create(array $data): Group
+    public function create(GroupData $data): Group
     {
-        return Group::create($data);
+        return Group::create($data->toArray());
     }
 
-    public function update(Group $model, array $data): Group
+    public function update(Group $model, GroupData $data): Group
     {
-        $model->update($data);
+        $model->update($data->toArray());
         return $model;
     }
 
@@ -22,8 +23,18 @@ class GroupRepository
         return Group::find($id);
     }
 
+    public function findOrFail(int $id): Group
+    {
+        return Group::findOrFail($id);
+    }
+
     public function paginate(int $perPage = 15)
     {
         return Group::paginate($perPage);
+    }
+
+    public function delete(Group $model): void
+    {
+        $model->delete();
     }
 }

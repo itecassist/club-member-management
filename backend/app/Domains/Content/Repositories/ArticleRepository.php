@@ -3,17 +3,18 @@
 namespace App\Domains\Content\Repositories;
 
 use App\Domains\Content\Models\Article;
+use App\Domains\Content\DTOs\ArticleData;
 
 class ArticleRepository
 {
-    public function create(array $data): Article
+    public function create(ArticleData $data): Article
     {
-        return Article::create($data);
+        return Article::create($data->toArray());
     }
 
-    public function update(Article $model, array $data): Article
+    public function update(Article $model, ArticleData $data): Article
     {
-        $model->update($data);
+        $model->update($data->toArray());
         return $model;
     }
 
@@ -22,8 +23,18 @@ class ArticleRepository
         return Article::find($id);
     }
 
+    public function findOrFail(int $id): Article
+    {
+        return Article::findOrFail($id);
+    }
+
     public function paginate(int $perPage = 15)
     {
         return Article::paginate($perPage);
+    }
+
+    public function delete(Article $model): void
+    {
+        $model->delete();
     }
 }
