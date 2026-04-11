@@ -17,8 +17,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('primary_admin_id')->nullable();
             $table->unsignedInteger('max_members')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->timestamps();
         });
     }

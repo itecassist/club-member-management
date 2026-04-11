@@ -15,8 +15,6 @@ return new class extends Migration {
             $table->string('display_name', 255);
             $table->text('description')->nullable();
             $table->boolean('is_system')->default(false);
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->index(['organisation_id', 'name']);
             $table->timestamps();
         });

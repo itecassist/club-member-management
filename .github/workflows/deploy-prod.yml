@@ -1,0 +1,34 @@
+name: Deploy Club Member Management System to Production
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build the application
+              run: npm run build
+
+            - name: Deploy to Production Server
+              env:
+                SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+                SERVER_USER: ${{ secrets.SERVER_USER }}
+                SERVER_HOST: ${{ secrets.SERVER_HOST }}
+                SERVER_PATH: ${{ secrets.SERVER_PATH }}
+              run: |
+                echo "$SSH_PRIVATE_KEY" > private_key.pem
+                chmod 600 private_key.pem
+                scp -i private_key.pem -r ./dist/* $SERVER_USER@$SERVER_HOST:$SERVER_PATH
